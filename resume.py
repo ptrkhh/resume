@@ -6,19 +6,16 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 
 patrick = {
     "name": "Patrick Hermawan",
-    "description": """
-        **Turning complex problems into innovative solutions is my passion.**
-        
-        I leverage my expertise in machine learning and other engineering fields to build high-performing systems for startups and corporations alike. Ensuring success at every stage from optimizing algorithms to leading development teams.
-    """,
+    "description": "**Turning complex problems into innovative solutions is my passion.**\n\nI leverage my expertise in machine learning and other engineering fields to build high-performing systems for startups and corporations alike. Ensuring success at every stage from optimizing algorithms to leading development teams.",
     "education": [
         {
             "institute": "Rhine-Waal University of Applied Sciences",
             "location": "Kleve, Germany",
-            "degree": "Mechatronic Systems Engineering B. Sc.",
+            "degree": "Mechatronic Engineering B. Sc.",
             "date_from": "09/2014",
             "date_to": "09/2018",
-            "description": [
+            "description": "Graduating on time with good GPA, while performing various activities inside & outside of university",
+            "description_details": [
                 "Focus: 3D CAD, Object Oriented Programming, Mobile Information Devices, Vehicle Technology",
                 "Average Grade: 1.9 according to German academic grading, equivalent to GPA 3.4",
                 "Project “Field Robot” working with Sensors, Controls, Software, and Documentation",
@@ -70,7 +67,7 @@ patrick = {
             "date_from": "04/2019",
             "date_to": "09/2021",
             "description": "Developing a ML service from scratch with double-digit improvements in accuracy and performance",
-            "description_detail": [
+            "description_details": [
                 "Python language with Flask API (similar to FastAPI)",
                 "Researching the most optimal model with python-crfsuite, scikit-learn, TensorFlow, PyTorch",
                 "RabbitMQ with Apache Avro queue messaging system",
@@ -128,12 +125,12 @@ if "convo" not in st.session_state:
         AI:
         """
 
-st.session_state.bard = ChatGoogleGenerativeAI(model="gemini-pro")
-st.session_state.memory = ConversationBufferWindowMemory(k=3, memory_key="memory")
-st.session_state.convo = LLMChain(
-    llm=st.session_state.bard, verbose=True, memory=st.session_state.memory,
-    prompt=PromptTemplate(input_variables=["memory", "human"], template=template),
-)
+    st.session_state.bard = ChatGoogleGenerativeAI(model="gemini-pro")
+    st.session_state.memory = ConversationBufferWindowMemory(k=3, memory_key="memory")
+    st.session_state.convo = LLMChain(
+        llm=st.session_state.bard, verbose=True, memory=st.session_state.memory,
+        prompt=PromptTemplate(input_variables=["memory", "human"], template=template),
+    )
 
 
 def ask_bot(input_text):
@@ -163,29 +160,27 @@ st.subheader("EXPERIENCES")
 st.write("---")
 for i in patrick["experience"]:
     st.write("🚧", f'**{i["company"]} ({i["location"]}) | {i["position"]}**')
-    st.write(f'{i["date_from"]}"{i["date_to"]}')
+    st.write(f'{i["date_from"]}-{i["date_to"]}')
     st.write(i["description"])
-    [st.write("* " +detail) for detail in i["description_details"]]
-    st.write('\n')
+    for detail in i["description_details"]:
+        st.write("* " + detail)
+    st.write("---")
 
-st.write('\n')
 st.subheader("EDUCATIONS")
 st.write("---")
 for i in patrick["education"]:
     st.write("🎓", f'**{i["institute"]} ({i["location"]}) | {i["degree"]}**')
-    st.write(f'{i["date_from"]}"{i["date_to"]}')
+    st.write(f'{i["date_from"]}-{i["date_to"]}')
     st.write(i["description"])
-    [st.write("* " +detail) for detail in i["description_details"]]
-    st.write('\n')
+    for detail in i["description_details"]:
+        st.write("* " + detail)
+    st.write("---")
 
-st.write('\n')
 st.subheader("PROJECTS")
 st.write("---")
 for project, link in patrick["project"].items():
     st.write(f"🏆 [{project}]({link})")
 
-# --- SKILLS ---
-st.write('\n')
 st.subheader("SKILLS")
 st.write("---")
 for i in patrick["skill"]:
