@@ -128,7 +128,7 @@ if "convo" not in st.session_state:
     st.session_state.bard = ChatGoogleGenerativeAI(model="gemini-pro")
     st.session_state.memory = ConversationBufferWindowMemory(k=3, memory_key="memory")
     st.session_state.convo = LLMChain(
-        llm=st.session_state.bard, verbose=True, memory=st.session_state.memory,
+        llm=st.session_state.bard, verbose=False, memory=st.session_state.memory,
         prompt=PromptTemplate(input_variables=["memory", "human"], template=template),
     )
 
