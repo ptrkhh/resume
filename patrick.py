@@ -84,20 +84,6 @@ patrick = {
             ],
         },
         {
-            "company": "MIA3 GmbH",
-            "location": "Gütersloh, Germany",
-            "position": "Full-Stack (Front-End and Back-End) Web Developer",
-            "year_from": "05 / 2018",
-            "year_to": "11 / 2018",
-            "description": "Development of a web app for iPad and other devices",
-            "description_details": [
-                "Frontend for iPad and other devices with JavaScript, Vue.JS, CSS,"
-                "Development of the backend with PHP and Symfony",
-                "Codeception and Selenium test cases",
-                "Implementation of feature requests and bug reports from a third-party client",
-            ],
-        },
-        {
             "company": "Eve-Tech Oy",
             "location": "Helsinki, Finland (remote)",
             "position": "Engineering and Project Intern",
@@ -137,10 +123,10 @@ patrick = {
         },
     ],
     "project": {
-        "GUI for AI image classifier using Tkinter + scikit-learn": "https://gitlab.com/patrick.hermawan/ai-in-123",
-        "Predicting PC parts by description using PRAW + TensorFlow": "https://gitlab.com/patrick.hermawan/buildmeapc",
-        "Predicting car's fuel consumption using Pandas + PyTorch": "https://github.com/ptrkhh/wheelsaroundme",
-        "Streamlit Resume with LLM (this resume)": "",
+        "AI in 1-2-3: GUI zero-code classifier training with scikit-learn + Tkinter": "https://gitlab.com/patrick.hermawan/ai-in-123",
+        "BuildMeAPC: Predicting PC parts by description with TensorFlow + PRAW": "https://gitlab.com/patrick.hermawan/buildmeapc",
+        "Wheelsaroundme: Predicting car fuel consumption with PyTorch + Polars": "https://github.com/ptrkhh/wheelsaroundme",
+        "ResumePatrick: Digital Resume using Streamlit + Langchain (this resume)": "",
     },
     "contact": {
         "LinkedIn": {"icon": "💼", "link": "https://www.linkedin.com/in/patrick-hermawan/"},
@@ -158,6 +144,7 @@ patrick = {
                               "carspotting"],
         "hidden_talent": ["guessing a car by its dashboard"],
         "favorite_food": "Carbonara",
+        "favorite_song": "I'm Yours by Jason Mraz",
         "got_covid": "once",
         "height": "165 cm",
         "weight": "75 kg",

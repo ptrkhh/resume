@@ -19,7 +19,7 @@ with col2:
     st.link_button("📄 Download Resume", patrick["resume_link"])
 
 text_input = f'Ask anything about {patrick["name"]}'
-text = st.text_input(text_input, help="Try asking about his hobbies")
+text = st.text_input(text_input, placeholder="Try asking about his hobbies", help="also try asking about his birthday")
 if text:
     st.info(ask_bot(text))
 
