@@ -1,4 +1,4 @@
-patrick = {
+{
     "name": "Patrick Hermawan",
     "description": "**Turning complex problems into innovative solutions is my passion.**\n\nI leverage my expertise in machine learning and other engineering fields to build high-performing systems for startups and corporations alike. Ensuring success at every stage from optimizing algorithms to leading development teams.",
     "education": [
@@ -14,9 +14,9 @@ patrick = {
                 "Average Grade: 1.9 according to German academic grading, equivalent to GPA 3.4",
                 "Project “Field Robot” working with Sensors, Controls, Software, and Documentation",
                 "Assistant to Prof. Achim Kehrein in the field of mathematics to Bachelor and Masters student",
-                "Participated in FSAE (Formula Student) racing team",
-            ],
-        },
+                "Participated in FSAE (Formula Student) racing team"
+            ]
+        }
     ],
     "experience": [
         {
@@ -35,7 +35,7 @@ patrick = {
                 "GORM and Hibernate ORM, with PostgreSQL (like CockroachDB) database, architected the DB structure",
                 "OpenSearch (ElasticSearch) and PostgreSQL full text search",
                 "Deployment using AWS (Amazon Web Services) S3, EC2, RDS, OpenSearch",
-                "Founder tasks: From meeting potential vendors to handling social media posts",
+                "Founder tasks: From meeting potential vendors to handling social media posts"
             ]
         },
         {
@@ -51,8 +51,8 @@ patrick = {
                 "Web and architectural technologies including FCM (Firebase Cloud Messaging), Honeycomb.io, Ray.io",
                 "Providing a Python package at pypi.org for API access",
                 "Refactored the entire codebase to maintain common codebase for the two services",
-                "Researching and benchmarking compression algorithms, including Apache Parquet",
-            ],
+                "Researching and benchmarking compression algorithms, including Apache Parquet"
+            ]
         },
         {
             "company": "Kata.ai",
@@ -66,8 +66,8 @@ patrick = {
                 "Researching the most optimal model with python-crfsuite, scikit-learn, TensorFlow, PyTorch",
                 "RabbitMQ with Apache Avro queue messaging system",
                 "Deployment using Docker, Kubernetes, and GCP (Google Cloud Platform) ",
-                "Maintaining existing Go (Golang) and Node.JS service",
-            ],
+                "Maintaining existing Go (Golang) and Node.JS service"
+            ]
         },
         {
             "company": "MIA3 GmbH",
@@ -77,11 +77,11 @@ patrick = {
             "year_to": "11 / 2018",
             "description": "Development of a web app for iPad and other devices",
             "description_details": [
-                "Frontend for iPad and other devices with JavaScript, Vue.JS, CSS,"
+                "Frontend for iPad and other devices with JavaScript, Vue.JS and CSS",
                 "Development of the backend with PHP and Symfony",
                 "Codeception and Selenium test cases",
-                "Implementation of feature requests and bug reports from a third-party client",
-            ],
+                "Implementation of feature requests and bug reports from a third-party client"
+            ]
         },
         {
             "company": "Eve-Tech Oy",
@@ -96,53 +96,125 @@ patrick = {
                 "Electronics PCB design using KiCAD",
                 "Arduino MCU coding",
                 "Cost optimization for manufacturing",
-                "Human ergonomic design",
-            ],
-        },
+                "Human ergonomic design"
+            ]
+        }
     ],
     "skill": [
         {
             "icon": "💻",
             "title": "Programming",
-            "list": ["Apache Avro", "Apache Kafka", "C", "C#", "CSS (CSS3)", "Django", "Docker", "Doctrine ORM",
-                     "Fabric.js", "Flask", "Gherkin", "GORM", "Hibernate ORM", "HTML (HTML5)", "Java",
-                     "JavaScript", "Kubernetes", "MySQL / MariaDB", "Node.JS", "PHP", "PostgreSQL / CockroachDB",
-                     "PyTest", "Python", "RabbitMQ", "Redis", "Symfony", "Vue.js", "WordPress"],
+            "list": [
+                "Apache Avro",
+                "Apache Kafka",
+                "C",
+                "C#",
+                "CSS (CSS3)",
+                "Django",
+                "Docker",
+                "Doctrine ORM",
+                "Fabric.js",
+                "Flask",
+                "Gherkin",
+                "GORM",
+                "Hibernate ORM",
+                "HTML (HTML5)",
+                "Java",
+                "JavaScript",
+                "Kubernetes",
+                "MySQL / MariaDB",
+                "Node.JS",
+                "PHP",
+                "PostgreSQL / CockroachDB",
+                "PyTest",
+                "Python",
+                "RabbitMQ",
+                "Redis",
+                "Symfony",
+                "Vue.js",
+                "WordPress"
+            ]
         },
         {
             "icon": "🔧",
             "title": "Engineering",
-            "list": ["ANSYS", "Arduino", "AutoCAD Plant", "KiCAD", "MATLAB and Simulink", "PWM", "Raspberry Pi",
-                     "SolidWorks"],
+            "list": [
+                "ANSYS",
+                "Arduino",
+                "AutoCAD Plant",
+                "KiCAD",
+                "MATLAB and Simulink",
+                "PWM",
+                "Raspberry Pi",
+                "SolidWorks"
+            ]
         },
         {
             "icon": "🧠",
             "title": "Artificial Intelligence",
-            "list": ["Keras", "NLP (Stemming, Lemmatization, Named Entity Recognition)", "TF-IDF", "OpenCV",
-                     "Python-crfsuite(CRF)", "PyTorch", "Scikit-learn", "TensorFlow"],
-        },
+            "list": [
+                "Keras",
+                "NLP (Stemming, Lemmatization, Named Entity Recognition)",
+                "TF-IDF",
+                "OpenCV",
+                "Python-crfsuite(CRF)",
+                "PyTorch",
+                "Scikit-learn",
+                "TensorFlow"
+            ]
+        }
     ],
     "project": {
         "AI in 1-2-3: GUI zero-code classifier training with scikit-learn + Tkinter": "https://gitlab.com/patrick.hermawan/ai-in-123",
         "BuildMeAPC: Predicting PC parts by description with TensorFlow + PRAW": "https://gitlab.com/patrick.hermawan/buildmeapc",
         "Wheelsaroundme: Predicting car fuel consumption with PyTorch + Polars": "https://github.com/ptrkhh/wheelsaroundme",
-        "ResumePatrick: Digital Resume using Streamlit + Langchain (this resume)": "",
+        "ResumePatrick: Digital Resume using Streamlit + Langchain (this resume)": ""
     },
     "contact": {
-        "LinkedIn": {"icon": "💼", "link": "https://www.linkedin.com/in/patrick-hermawan/"},
-        "E-Mail (patrick.hermawan@outlook.com)": {"icon": "📫", "link": "mailto:patrick.hermawan@outlook.com"},
-        "WhatsApp (+6285158596077)": {"icon": "🟢", "link": "https://wa.me/6285158596077"},
-        "Telegram (+6285158596077)": {"icon": "🔵", "link": "https://t.me/+6285158596077"},
+        "LinkedIn": {
+            "icon": "💼",
+            "link": "https://www.linkedin.com/in/patrick-hermawan/"
+        },
+        "E-Mail (patrick.hermawan@outlook.com)": {
+            "icon": "📫",
+            "link": "mailto:patrick.hermawan@outlook.com"
+        },
+        "WhatsApp (+6285158596077)": {
+            "icon": "🟢",
+            "link": "https://wa.me/6285158596077"
+        },
+        "Telegram (+6285158596077)": {
+            "icon": "🔵",
+            "link": "https://t.me/+6285158596077"
+        }
     },
     "resume_link": "https://mega.nz/file/s5ETyQCK#_Unq8UbQtEGXmXu4BtRmoykpETQyHH896TVPk1s1eV4",
-    "languages": ["Bahasa Indonesia", "English", "German"],
+    "languages": [
+        "Bahasa Indonesia",
+        "English",
+        "German"
+    ],
     "birthday": "15.03.1995",
     "birthplace": "Jakarta, Indonesia",
     "personal_data": {
-        "interests_hobbies": ["AI", "cars", "electric vehicles", "social media", "tech", "gadgets", "tesla",
-                              "technology", "human psychology", "building PCs", "twitter", "surfing the web",
-                              "carspotting"],
-        "hidden_talent": ["guessing a car by its dashboard"],
+        "interests_hobbies": [
+            "AI",
+            "cars",
+            "electric vehicles",
+            "social media",
+            "tech",
+            "gadgets",
+            "tesla",
+            "technology",
+            "human psychology",
+            "building PCs",
+            "twitter",
+            "surfing the web",
+            "carspotting"
+        ],
+        "hidden_talent": [
+            "guessing a car by its dashboard"
+        ],
         "favorite_food": "Carbonara",
         "favorite_song": "I'm Yours by Jason Mraz",
         "got_covid": "once",
@@ -153,6 +225,6 @@ patrick = {
         "laptop": "Dell XPS 15",
         "phone": "Samsung Galaxy M51",
         "tablet": "Samsung Galaxy Tab S7",
-        "car": "Merc W124",
-    },
+        "car": "Merc W124"
+    }
 }
