@@ -1,9 +1,9 @@
 import streamlit as st
 import yaml
-from langchain.chains import LLMChain
-from langchain.chat_models import ChatOpenAI
+from langchain.chains.llm import LLMChain
 from langchain.memory import ConversationBufferWindowMemory
 from langchain_core.prompts import PromptTemplate
+from langchain_openai import ChatOpenAI
 
 
 def initialize_llm(profile):
