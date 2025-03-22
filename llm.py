@@ -1,6 +1,7 @@
 import streamlit as st
 import yaml
 from langchain.chains import LLMChain
+from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferWindowMemory
 from langchain_core.prompts import PromptTemplate
 
