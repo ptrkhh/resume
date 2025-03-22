@@ -3,7 +3,6 @@ import yaml
 from langchain.chains import LLMChain
 from langchain.memory import ConversationBufferWindowMemory
 from langchain_core.prompts import PromptTemplate
-from langchain_google_genai import ChatGoogleGenerativeAI
 
 
 def initialize_llm(profile):
@@ -20,10 +19,10 @@ def initialize_llm(profile):
     AI:
     """
 
-    bard = ChatGoogleGenerativeAI(model="gemini-pro")
+    llm = ChatOpenAI(model_name="gpt-4o", openai_api_key=st.secrets["OPENAI_API_KEY"])
     memory = ConversationBufferWindowMemory(k=3, memory_key="memory")
     return LLMChain(
-        llm=bard, verbose=False, memory=memory,
+        llm=llm, verbose=False, memory=memory,
         prompt=PromptTemplate(input_variables=["memory", "human"], template=template),
     )
 
