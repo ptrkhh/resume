@@ -194,17 +194,21 @@
       "icon": "💼",
       "link": "https://www.linkedin.com/in/patrick-hermawan/"
     },
-    "E-Mail (patrick.hermawan@outlook.com)": {
+    "E-Mail": {
       "icon": "📫",
       "link": "mailto:patrick.hermawan@outlook.com"
     },
-    "WhatsApp (+6285158596077)": {
+    "WhatsApp": {
       "icon": "🟢",
       "link": "https://wa.me/6285158596077"
     },
-    "Telegram (+6285158596077)": {
+    "Telegram": {
       "icon": "🔵",
       "link": "https://t.me/+6285158596077"
+    },
+    "GitHub": {
+      "icon": "👨‍💻",
+      "link": "https://github.com/ptrkhh/"
     }
   },
   "resume_link": "https://mega.nz/file/AsVRHC6D#wSd2V1ie6dwIFW04e-aDN1xJfD5Cwq9PNQMlq5j-0J8",
@@ -216,6 +220,7 @@
   "birthday": "15.03.1995",
   "birthplace": "Jakarta, Indonesia",
   "personal_data": {
+    "current_location": "Jakarta, Indonesia",
     "interests_hobbies": [
       "Artificial Intelligence & Machine Learning",
       "Automotive Technology & EVs",
