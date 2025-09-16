@@ -1,12 +1,12 @@
-import json
 import streamlit as st
+import yaml
 
 from llm import initialize_llm, ask_bot
 
 # Load resume data and initialize chatbot
 if "convo" not in st.session_state:
-    with open("patrick.json") as f:
-        st.session_state.patrick = json.load(f)
+    with open("patrick.yaml") as f:
+        st.session_state.patrick = yaml.safe_load(f)
     st.session_state.convo = initialize_llm(st.session_state.patrick)
 
 # Page configuration
@@ -20,7 +20,8 @@ st.set_page_config(
 
 # Header section
 st.title(f"{st.session_state.patrick['name']}")
-st.subheader(st.session_state.patrick["description"])
+st.subheader(st.session_state.patrick["title"])
+st.write(st.session_state.patrick["summary"])
 
 # Contact information
 st.subheader("📞 Contact Information")
