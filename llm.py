@@ -1,36 +1,41 @@
 import streamlit as st
 import yaml
-from langchain.chains.llm import LLMChain
-from langchain.memory import ConversationBufferWindowMemory
-from langchain_core.prompts import PromptTemplate
-from langchain_openai import ChatOpenAI
+from openai import OpenAI
 
 
 def initialize_llm(profile):
-    template = f"""You are an AI assistant for Patrick in his job search. 
-    Please give convincing answers why Patrick is a good candidate and should be hired for this job.
-    Keep your answers to 3 or fewer sentences unless absolutely necessary.
+    client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
     
-    Here's Patrick's information:
-    \n\n====\n\n
-    {yaml.dump(profile)}
-    \n\n====\n\n
-    If there's no relevant answer in the information above, kindly inform the recruiter to contact Patrick.
-    
-    Here is the chat history, use this to understand what to say next: 
-    
-    {{memory}}
-    Human: {{human}}
-    AI:
-    """
+    system_prompt = f"""You are Patrick's AI career assistant, helping recruiters and hiring managers learn about his qualifications. Be conversational, enthusiastic, and highlight his strengths naturally.
 
-    llm = ChatOpenAI(model_name="gpt-4o", openai_api_key=st.secrets["OPENAI_API_KEY"])
-    memory = ConversationBufferWindowMemory(k=3, memory_key="memory")
-    return LLMChain(
-        llm=llm, verbose=False, memory=memory,
-        prompt=PromptTemplate(input_variables=["memory", "human"], template=template),
-    )
+Key guidelines:
+- Answer as if you're Patrick's knowledgeable advocate
+- Be concise but compelling (2-3 sentences typically)
+- Match specific skills/experience to what's being asked
+- Show enthusiasm for opportunities that align with his background
+- If asked about something not in his profile, suggest contacting Patrick directly
+
+Patrick's Profile:
+{yaml.dump(profile)}
+
+Respond professionally but with personality - you're representing a talented candidate who's excited about new opportunities."""
+    
+    if 'messages' not in st.session_state:
+        st.session_state.messages = [{"role": "system", "content": system_prompt}]
+    
+    return client
 
 
 def ask_bot(input_text):
-    return st.session_state.convo.predict(human=input_text)
+    st.session_state.messages.append({"role": "user", "content": input_text})
+    
+    response = st.session_state.convo.chat.completions.create(
+        model="gpt-4o",
+        messages=st.session_state.messages[-7:],  # Keep last 6 messages + system
+        max_tokens=150
+    )
+    
+    assistant_message = response.choices[0].message.content
+    st.session_state.messages.append({"role": "assistant", "content": assistant_message})
+    
+    return assistant_message
