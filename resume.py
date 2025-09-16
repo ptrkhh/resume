@@ -1,61 +1,103 @@
 import json
-
 import streamlit as st
 
 from llm import initialize_llm, ask_bot
 
+# Load resume data and initialize chatbot
 if "convo" not in st.session_state:
     with open("patrick.json") as f:
         st.session_state.patrick = json.load(f)
     st.session_state.convo = initialize_llm(st.session_state.patrick)
 
+# Page configuration
 PAGE_TITLE = "Resume | " + st.session_state.patrick["name"]
-PAGE_ICON = ":wave:"
-st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
-st.title(st.session_state.patrick["name"])
-col1, col2 = st.columns(2, gap="small")
-with col1:
-    st.write(st.session_state.patrick["description"])
+st.set_page_config(
+    page_title=PAGE_TITLE,
+    page_icon="👨💼",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
+# Header section
+st.title(f"{st.session_state.patrick['name']}")
+st.subheader(st.session_state.patrick["description"])
+
+# Contact information
+st.subheader("📞 Contact Information")
+contact_items = list(st.session_state.patrick["contact"].items())
+contact_cols = st.columns(len(contact_items))
+
+for idx, (platform, info) in enumerate(contact_items):
+    with contact_cols[idx]:
+        st.link_button(f'{info["icon"]} {platform}', info["link"], use_container_width=True)
+
+# Download resume button
+col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
-    for idx, (platform, i) in enumerate(st.session_state.patrick["contact"].items()):
-        st.link_button(f'{i["icon"]} {platform}', i["link"])
-    st.link_button("📄 Download Resume", st.session_state.patrick["resume_link"])
+    st.link_button("📄 Download Resume", st.session_state.patrick["resume_link"], use_container_width=True)
 
-text_input = f'Ask anything about {st.session_state.patrick["name"]}'
-text = st.text_input(text_input, placeholder="Try asking about his hobbies", help="also try asking about his birthday")
-if text:
-    st.info(ask_bot(text))
+# Interactive chat section
+st.subheader(f"💬 Chat with {st.session_state.patrick['name']}'s AI Assistant")
+st.caption("*Ask me anything about my background, experience, or interests!*")
 
-st.write('\n')
-st.subheader("EXPERIENCES")
-st.write("---")
-for i in st.session_state.patrick["experience"][0:3]:
-    st.write("🚧", f'**{i["company"]} ({i["location"]}) | {i["position"]}**')
-    st.write(f'{i["year_from"]} - {i["year_to"]}')
-    st.write(i["description"])
-    for detail in i["description_details"]:
-        st.write("* " + detail)
-    st.write("---")
+user_question = st.text_input(
+    "Your question:",
+    placeholder="Try asking about hobbies, experience, or skills...",
+    help="Ask about background, projects, or personal interests"
+)
 
-st.subheader("EDUCATIONS")
-st.write("---")
-for i in st.session_state.patrick["education"][0:3]:
-    st.write("🎓", f'**{i["institute"]} ({i["location"]}) | {i["degree"]}**')
-    st.write(f'{i["year_from"]} - {i["year_to"]}')
-    st.write(i["description"])
-    for detail in i["description_details"]:
-        st.write("* " + detail)
-    st.write("---")
+if user_question:
+    with st.spinner("Thinking..."):
+        response = ask_bot(user_question)
+    st.success(f"💡 **Answer:** {response}")
 
-st.subheader("PROJECTS")
-st.write("---")
-for project, link in st.session_state.patrick["project"].items():
-    st.write(f"🏆 [{project}]({link})")
+# Professional Experience Section
+st.header("💼 Professional Experience")
 
-st.write("---")
-st.subheader("SKILLS")
-st.write("---")
-for i in st.session_state.patrick["skill"]:
-    icon, title, items = i["icon"], i["title"], i["list"]
-    items = ", ".join(sorted(items))
-    st.write(f"{icon} {title}: {items}")
+for experience in st.session_state.patrick["experience"][:3]:
+    with st.container(border=True):
+        st.subheader(f"🏢 {experience['company']} - {experience['location']}")
+        st.write(f"**{experience['position']}**")
+        st.caption(f"{experience['year_from']} - {experience['year_to']}")
+        st.write(experience["description"])
+
+        if experience["description_details"]:
+            st.write("**Key Achievements:**")
+            for detail in experience["description_details"]:
+                st.markdown(f"&nbsp;&nbsp;&nbsp;&nbsp;• {detail}")
+
+# Education Section
+st.header("🎓 Education")
+
+for education in st.session_state.patrick["education"][:3]:
+    with st.container(border=True):
+        st.subheader(f"🏫 {education['institute']} - {education['location']}")
+        st.write(f"**{education['degree']}**")
+        st.caption(f"{education['year_from']} - {education['year_to']}")
+        st.write(education["description"])
+
+        if education["description_details"]:
+            st.write("**Highlights:**")
+            for detail in education["description_details"]:
+                st.markdown(f"&nbsp;&nbsp;&nbsp;&nbsp;• {detail}")
+
+# Projects Section
+st.header("🚀 Featured Projects")
+
+col1, col2 = st.columns(2)
+projects = list(st.session_state.patrick["project"].items())
+
+for idx, (project_name, project_link) in enumerate(projects):
+    col = col1 if idx % 2 == 0 else col2
+    with col:
+        with st.container(border=True):
+            st.write(f"🏆 [{project_name}]({project_link})")
+
+# Skills Section
+st.header("⚡ Technical Skills")
+
+for skill_category in st.session_state.patrick["skill"]:
+    with st.container(border=True):
+        st.subheader(f"{skill_category['icon']} {skill_category['title']}")
+        skills = ", ".join(sorted(skill_category["list"]))
+        st.write(skills)
