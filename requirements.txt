@@ -3,3 +3,4 @@ streamlit_js_eval
 openai
 reportlab
 pyyaml
+qrcode[pil]

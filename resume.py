@@ -3,7 +3,8 @@ import yaml
 from streamlit_js_eval import streamlit_js_eval
 
 from llm import initialize_llm, ask_bot
-from pdf_generator import generate_resume_pdf
+from pdf_generator import generate_resume_pdf, generate_contact_card_pdf
+from qr_generator import generate_vcard_qr
 
 # Load resume data and initialize chatbot
 if "convo" not in st.session_state:
@@ -55,6 +56,22 @@ with contact_col:
                 use_container_width=True,
                 type="primary"
             )
+
+    # Contact card action buttons
+    col1, col2 = st.columns(2)
+    with col1:
+        st.download_button(
+            label="🖨️ Print Contact Card",
+            data=generate_contact_card_pdf(st.session_state.patrick),
+            file_name=f"{st.session_state.patrick['name'].replace(' ', '_')}_Contact_Card.pdf",
+            mime="application/pdf",
+            use_container_width=True
+        )
+
+    with col2:
+        if st.button("📱 Scan Contact Card", use_container_width=True):
+            qr_image = generate_vcard_qr(st.session_state.patrick)
+            st.image(qr_image, caption="Scan to save contact info", width=200)
 
 st.divider()
 
