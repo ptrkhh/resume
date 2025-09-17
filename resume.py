@@ -1,5 +1,6 @@
 import streamlit as st
 import yaml
+from streamlit_js_eval import streamlit_js_eval
 
 from llm import initialize_llm, ask_bot
 from pdf_generator import generate_resume_pdf
@@ -19,30 +20,41 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Contact Card Section
-with st.container(border=True):
-    col1, col2 = st.columns([2, 1])
-    
-    with col1:
-        st.title(f"{st.session_state.patrick['name']}")
-        st.subheader(st.session_state.patrick['title'])
-        st.write(f"📍 {st.session_state.patrick['personal_data']['current_location']}")
-        st.write(f"📧 {st.session_state.patrick['personal_data']['email']}")
-        st.write(f"📱 {st.session_state.patrick['personal_data']['phone_number']}")
-    
-    with col2:
-        st.markdown("### Quick Contact")
-        for platform, info in st.session_state.patrick["contact"].items():
-            st.link_button(f'{info["icon"]} {platform}', info["link"], use_container_width=True)
+# Get screen width for responsive layout
+screen_width = streamlit_js_eval(js_expressions='window.innerWidth', key='screen_width')
 
-        st.download_button(
-            label="📄 Download Resume",
-            data=generate_resume_pdf(st.session_state.patrick),
-            file_name=f"{st.session_state.patrick['name'].replace(' ', '_')}_Resume.pdf",
-            mime="application/pdf",
-            use_container_width=True,
-            type="primary"
-        )
+# Calculate responsive column ratios for contact card appearance
+if screen_width > 1200:
+    side_ratio = (screen_width - 800) / (2 * screen_width)
+    center_ratio = 800 / screen_width
+    col_ratios = [side_ratio, center_ratio, side_ratio]
+else:
+    col_ratios = [0.05, 0.9, 0.05]
+
+_, contact_col, _ = st.columns(col_ratios)
+with contact_col:
+    with st.container(border=True):
+        col1, col2 = st.columns([2, 1])
+
+        with col1:
+            st.title(f"{st.session_state.patrick['name']}")
+            st.subheader(st.session_state.patrick['title'])
+            st.write(f"📍 {st.session_state.patrick['personal_data']['current_location']}")
+            st.write(f"📧 {st.session_state.patrick['personal_data']['email']}")
+            st.write(f"📱 {st.session_state.patrick['personal_data']['phone_number']}")
+
+        with col2:
+            for platform, info in st.session_state.patrick["contact"].items():
+                st.link_button(f'{info["icon"]} {platform}', info["link"], use_container_width=True)
+
+            st.download_button(
+                label="📄 Download Resume",
+                data=generate_resume_pdf(st.session_state.patrick),
+                file_name=f"{st.session_state.patrick['name'].replace(' ', '_')}_Resume.pdf",
+                mime="application/pdf",
+                use_container_width=True,
+                type="primary"
+            )
 
 st.divider()
 
