@@ -18,27 +18,32 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Header section
-st.title(f"{st.session_state.patrick['name']}")
-st.subheader(st.session_state.patrick["title"])
+# Contact Card Section
+with st.container(border=True):
+    col1, col2 = st.columns([2, 1])
+    
+    with col1:
+        st.title(f"{st.session_state.patrick['name']}")
+        st.subheader(st.session_state.patrick['title'])
+        st.write(f"📍 {st.session_state.patrick['personal_data']['current_location']}")
+        st.write(f"📧 {st.session_state.patrick['personal_data']['email']}")
+        st.write(f"📱 {st.session_state.patrick['personal_data']['phone_number']}")
+    
+    with col2:
+        st.markdown("### Quick Contact")
+        for platform, info in st.session_state.patrick["contact"].items():
+            st.link_button(f'{info["icon"]} {platform}', info["link"], use_container_width=True)
+        
+        st.link_button("📄 Download Resume", st.session_state.patrick["resume_link"], use_container_width=True, type="primary")
+
+st.divider()
+
+# Resume Content Section
+st.header("📋 Professional Resume")
 st.write(st.session_state.patrick["summary"])
 
-# Contact information
-st.subheader("📞 Contact Information")
-contact_items = list(st.session_state.patrick["contact"].items())
-contact_cols = st.columns(len(contact_items))
-
-for idx, (platform, info) in enumerate(contact_items):
-    with contact_cols[idx]:
-        st.link_button(f'{info["icon"]} {platform}', info["link"], use_container_width=True)
-
-# Download resume button
-col1, col2, col3 = st.columns([1, 2, 1])
-with col2:
-    st.link_button("📄 Download Resume", st.session_state.patrick["resume_link"], use_container_width=True)
-
 # Interactive chat section
-st.subheader(f"💬 Chat with {st.session_state.patrick['name']}'s AI Assistant")
+st.header(f"💬 Chat with {st.session_state.patrick['name']}'s AI Assistant")
 st.caption("*Ask me anything about my background, experience, or interests!*")
 
 user_question = st.text_input(
@@ -65,7 +70,7 @@ for experience in st.session_state.patrick["experience"][:3]:
         if experience["description_details"]:
             st.write("**Key Achievements:**")
             for detail in experience["description_details"]:
-                st.markdown(f"&nbsp;&nbsp;&nbsp;&nbsp;• {detail}")
+                st.markdown(f"• {detail}")
 
 # Education Section
 st.header("🎓 Education")
@@ -80,7 +85,7 @@ for education in st.session_state.patrick["education"][:3]:
         if education["description_details"]:
             st.write("**Highlights:**")
             for detail in education["description_details"]:
-                st.markdown(f"&nbsp;&nbsp;&nbsp;&nbsp;• {detail}")
+                st.markdown(f"• {detail}")
 
 # Projects Section
 st.header("🚀 Featured Projects")

@@ -1,6 +1,6 @@
 name: Patrick Hermawan
-title: Senior AI/ML Engineer & Technical Leader with 5+ years transforming businesses through innovative AI solutions.
-summary: Proven track record of delivering six-figure AI projects, leading cross-functional teams, and architecting scalable ML systems. Expertise spans from startup environments to enterprise-level implementations, consistently driving measurable business impact through cutting-edge technology.
+title: AI/ML Engineer & Technical Leader
+summary: AI/ML Engineer & Technical Leader with 5+ years transforming businesses through innovative AI solutions. Proven track record of delivering six-figure AI projects, leading cross-functional teams, and architecting scalable ML systems. Expertise spans from startup environments to enterprise-level implementations, consistently driving measurable business impact through cutting-edge technology.
 
 education:
   - institute: Rhine-Waal University of Applied Sciences
@@ -179,7 +179,7 @@ contact:
     icon: 🔵
     link: https://t.me/+6285158596077
   GitHub:
-    icon: 👨💻
+    icon: 🐙
     link: https://github.com/ptrkhh/
 
 resume_link: https://mega.nz/file/AsVRHC6D#wSd2V1ie6dwIFW04e-aDN1xJfD5Cwq9PNQMlq5j-0J8
@@ -189,11 +189,13 @@ languages:
   - English (Fluent)
   - German (Professional)
 
-birthday: 15.03.1995
+birthday: March 15, 1995
 birthplace: Jakarta, Indonesia
 
 personal_data:
   current_location: Jakarta, Indonesia
+  phone_number: "+628-51-58-59-60-77"
+  email: "patrick.hermawan@outlook.com"
   interests_hobbies:
     - Artificial Intelligence & Machine Learning
     - Automotive Technology & EVs
