@@ -2,6 +2,7 @@ import streamlit as st
 import yaml
 
 from llm import initialize_llm, ask_bot
+from pdf_generator import generate_resume_pdf
 
 # Load resume data and initialize chatbot
 if "convo" not in st.session_state:
@@ -33,8 +34,15 @@ with st.container(border=True):
         st.markdown("### Quick Contact")
         for platform, info in st.session_state.patrick["contact"].items():
             st.link_button(f'{info["icon"]} {platform}', info["link"], use_container_width=True)
-        
-        st.link_button("📄 Download Resume", st.session_state.patrick["resume_link"], use_container_width=True, type="primary")
+
+        st.download_button(
+            label="📄 Download Resume",
+            data=generate_resume_pdf(st.session_state.patrick),
+            file_name=f"{st.session_state.patrick['name'].replace(' ', '_')}_Resume.pdf",
+            mime="application/pdf",
+            use_container_width=True,
+            type="primary"
+        )
 
 st.divider()
 
