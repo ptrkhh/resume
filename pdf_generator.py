@@ -1,4 +1,5 @@
 import io
+import qrcode
 from datetime import datetime
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_LEFT, TA_CENTER
@@ -6,7 +7,6 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image
-import qrcode
 
 
 def generate_resume_pdf(patrick_data):
@@ -71,42 +71,43 @@ def generate_resume_pdf(patrick_data):
 
 def generate_contact_card_pdf(patrick_data):
     buffer = io.BytesIO()
-    doc = SimpleDocTemplate(buffer, pagesize=(4*inch, 2.5*inch), rightMargin=0.2*inch, leftMargin=0.2*inch, topMargin=0.2*inch, bottomMargin=0.2*inch)
-    
+    doc = SimpleDocTemplate(buffer, pagesize=(4 * inch, 2.5 * inch), rightMargin=0.2 * inch, leftMargin=0.2 * inch,
+                            topMargin=0.15 * inch, bottomMargin=0.15 * inch)
+
     # Modern color palette
     primary_color = colors.Color(0.2, 0.3, 0.5)  # Professional blue
-    accent_color = colors.Color(0.4, 0.6, 0.8)   # Light blue
-    text_color = colors.Color(0.2, 0.2, 0.2)     # Dark gray
-    
+    accent_color = colors.Color(0.4, 0.6, 0.8)  # Light blue
+    text_color = colors.Color(0.2, 0.2, 0.2)  # Dark gray
+
     styles = getSampleStyleSheet()
-    
+
     # Modern typography styles
     name_style = ParagraphStyle(
-        'Name', 
-        parent=styles['Heading1'], 
-        fontSize=18, 
-        alignment=TA_CENTER, 
+        'Name',
+        parent=styles['Heading1'],
+        fontSize=18,
+        alignment=TA_CENTER,
         textColor=primary_color,
         fontName='Helvetica-Bold',
         spaceAfter=4
     )
-    
+
     title_style = ParagraphStyle(
-        'Title', 
-        parent=styles['Normal'], 
-        fontSize=11, 
-        alignment=TA_CENTER, 
+        'Title',
+        parent=styles['Normal'],
+        fontSize=11,
+        alignment=TA_CENTER,
         textColor=accent_color,
         fontName='Helvetica',
         spaceAfter=6
     )
-    
+
     story = []
-    
+
     # Header section
     story.append(Paragraph(patrick_data['name'].upper(), name_style))
     story.append(Paragraph(patrick_data['title'], title_style))
-    
+
     # Generate QR code for Streamlit app
     qr = qrcode.QRCode(version=1, box_size=10, border=5)
     qr.add_data("https://resumepatrick.streamlit.app")
@@ -115,20 +116,22 @@ def generate_contact_card_pdf(patrick_data):
     qr_buffer = io.BytesIO()
     qr_image.save(qr_buffer, format='PNG')
     qr_buffer.seek(0)
-    qr_img = Image(qr_buffer, width=0.89*inch, height=0.89*inch)
-    
+    qr_img = Image(qr_buffer, width=0.89 * inch, height=0.89 * inch)
+
     # Contact information in clean format
     contact_data = [
-        ["Email:", patrick_data['personal_data']['email']],
-        ["Phone:", patrick_data['personal_data']['phone_number']],
-        ["Location:", patrick_data['personal_data']['current_location']],
-        ["LinkedIn:", "linkedin.com/in/patrick-hermawan"],
+        ["Email", patrick_data['personal_data']['email']],
+        ["Phone", patrick_data['personal_data']['phone_number']],
+        ["Location", patrick_data['personal_data']['current_location']],
+        ["LinkedIn", patrick_data['contact']['LinkedIn']['link'].replace("https://www.", "")],
+        ["Instagram", patrick_data['contact']['Instagram']['link'].replace("https://www.", "")],
+        ["GitHub", patrick_data['contact']['GitHub']['link'].replace("https://www.", "")],
     ]
-    
-    contact_table = Table(contact_data, colWidths=[0.6*inch, 2*inch])
+
+    contact_table = Table(contact_data, colWidths=[0.65 * inch, 1.95 * inch])
     contact_table.setStyle(TableStyle([
-        ('FONTNAME', (0, 0), (0, -1), 'Helvetica-Bold'),
-        ('FONTNAME', (1, 0), (1, -1), 'Helvetica'),
+        ('FONTNAME', (0, 0), (0, -1), 'Times-Bold'),
+        ('FONTNAME', (1, 0), (1, -1), 'Times-Roman'),
         ('FONTSIZE', (0, 0), (-1, -1), 9),
         ('TEXTCOLOR', (0, 0), (0, -1), primary_color),
         ('TEXTCOLOR', (1, 0), (1, -1), text_color),
@@ -138,17 +141,26 @@ def generate_contact_card_pdf(patrick_data):
         ('TOPPADDING', (0, 0), (-1, -1), 2),
         ('BOTTOMPADDING', (0, 0), (-1, -1), 1),
     ]))
-    
+
     # Layout with contact info and QR code side by side
-    main_table = Table([[contact_table, qr_img]], colWidths=[2.5*inch, 0.9*inch])
+    main_table = Table([[contact_table, qr_img]], colWidths=[2.5 * inch, 0.9 * inch])
     main_table.setStyle(TableStyle([
         ('VALIGN', (0, 0), (-1, -1), 'TOP'),
         ('LEFTPADDING', (0, 0), (-1, -1), 0),
         ('RIGHTPADDING', (0, 0), (-1, -1), 0),
     ]))
-    
+
     story.append(main_table)
-    
+
     doc.build(story)
     buffer.seek(0)
     return buffer
+
+
+if __name__ == "__main__":
+    import yaml
+    pdf_buffer = generate_contact_card_pdf(yaml.safe_load(open("patrick.yaml")))
+
+    with open("test.pdf", "wb") as f:
+        f.write(pdf_buffer.getvalue())
+

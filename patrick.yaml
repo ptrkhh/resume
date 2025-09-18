@@ -168,7 +168,7 @@ project:
 contact:
   LinkedIn:
     icon: 💼
-    link: https://www.linkedin.com/in/patrick-hermawan/
+    link: https://www.linkedin.com/in/patrick-hermawan
   E-Mail:
     icon: 📫
     link: mailto:patrick.hermawan@outlook.com
@@ -180,7 +180,10 @@ contact:
     link: https://t.me/+6285158596077
   GitHub:
     icon: 🐙
-    link: https://github.com/ptrkhh/
+    link: https://www.github.com/ptrkhh
+  Instagram:
+    icon: 📷
+    link: https://www.instagram.com/patrick.hermawan
 
 resume_link: https://mega.nz/file/AsVRHC6D#wSd2V1ie6dwIFW04e-aDN1xJfD5Cwq9PNQMlq5j-0J8
 
