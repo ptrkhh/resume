@@ -22,11 +22,16 @@ def vcard_content():
 
     return f"""BEGIN:VCARD
 VERSION:3.0
+N:Hermawan;Patrick;;;
 FN:{data['name']}
 GENDER:M
-ORG:{data['title']}
 EMAIL:{data['personal_data']['email']}
 TEL:{data['personal_data']['phone_number'].replace("-", "")}
-ADR:{data['personal_data']['current_location']}
+ADR;TYPE=home:;;;Jakarta;Jakarta;;Indonesia
+GEO:-6.21462;106.84513
+ORG:{data['title']}
+ROLE:{data['title']}
+TITLE:{data['title']}
+NOTE:{data['summary']}
 URL:https://resumepatrick.streamlit.app
 END:VCARD"""
