@@ -1,6 +1,7 @@
 import io
+
 import qrcode
-import streamlit as st
+import yaml
 
 
 def generate_vcard_qr():
@@ -16,12 +17,16 @@ def generate_vcard_qr():
 
 
 def vcard_content():
+    with open('patrick.yaml', 'r') as f:
+        data = yaml.safe_load(f)
+
     return f"""BEGIN:VCARD
-        VERSION:3.0
-        FN:{st.session_state.patrick['name']}
-        ORG:{st.session_state.patrick['title']}
-        EMAIL:{st.session_state.patrick['personal_data']['email']}
-        TEL:{st.session_state.patrick['personal_data']['phone_number'].replace("-", "")}
-        ADR:;;{st.session_state.patrick['personal_data']['current_location']};;;;
-        URL:https://resumepatrick.streamlit.app
-        END:VCARD"""
+VERSION:3.0
+FN:{data['name']}
+GENDER:M
+ORG:{data['title']}
+EMAIL:{data['personal_data']['email']}
+TEL:{data['personal_data']['phone_number'].replace("-", "")}
+ADR:{data['personal_data']['current_location']}
+URL:https://resumepatrick.streamlit.app
+END:VCARD"""
