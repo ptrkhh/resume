@@ -1,6 +1,6 @@
 streamlit
 streamlit_js_eval
-openai
+google-genai
 reportlab
 pyyaml
 qrcode[pil]

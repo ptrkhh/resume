@@ -110,7 +110,7 @@ def generate_contact_card_pdf(patrick_data):
 
     # Generate QR code for Streamlit app
     qr = qrcode.QRCode(version=1, box_size=10, border=5)
-    qr.add_data("https://resumepatrick.streamlit.app")
+    qr.add_data("https://contactpatrick.streamlit.app")
     qr.make(fit=True)
     qr_image = qr.make_image(fill_color="black", back_color="white")
     qr_buffer = io.BytesIO()

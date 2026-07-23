@@ -1,11 +1,12 @@
 import streamlit as st
 import yaml
-from openai import OpenAI
+from google import genai
+from google.genai import types
 
 
 def initialize_llm(profile):
-    client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
-    
+    client = genai.Client(api_key=st.secrets["GOOGLE_API_KEY"])
+
     system_prompt = f"""You are Patrick's AI career assistant, helping recruiters and hiring managers learn about his qualifications. Be conversational, enthusiastic, and highlight his strengths naturally.
 
 Key guidelines:
@@ -19,23 +20,18 @@ Patrick's Profile:
 {yaml.dump(profile)}
 
 Respond professionally but with personality - you're representing a talented candidate who's excited about new opportunities."""
-    
-    if 'messages' not in st.session_state:
-        st.session_state.messages = [{"role": "system", "content": system_prompt}]
-    
-    return client
+
+    # chats.create keeps conversation history for us; thinking_budget=0 keeps the
+    # short-answer bot fast/cheap and stops thinking tokens eating the output budget.
+    return client.chats.create(
+        model="gemini-2.5-flash",
+        config=types.GenerateContentConfig(
+            system_instruction=system_prompt,
+            max_output_tokens=500,
+            thinking_config=types.ThinkingConfig(thinking_budget=0),
+        ),
+    )
 
 
 def ask_bot(input_text):
-    st.session_state.messages.append({"role": "user", "content": input_text})
-    
-    response = st.session_state.convo.chat.completions.create(
-        model="gpt-4o",
-        messages=st.session_state.messages[-7:],  # Keep last 6 messages + system
-        max_tokens=150
-    )
-    
-    assistant_message = response.choices[0].message.content
-    st.session_state.messages.append({"role": "assistant", "content": assistant_message})
-    
-    return assistant_message
+    return st.session_state.convo.send_message(input_text).text

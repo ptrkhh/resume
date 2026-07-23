@@ -153,3 +153,21 @@ for skill_category in st.session_state.patrick["skill"]:
         st.subheader(f"{skill_category['icon']} {skill_category['title']}")
         skills = ", ".join(sorted(skill_category["list"]))
         st.write(skills)
+
+# Recommendations Section
+if st.session_state.patrick.get("recommendations"):
+    st.header("🌟 Recommendations")
+    for rec in st.session_state.patrick["recommendations"]:
+        with st.container(border=True):
+            st.markdown(f"> {rec['text']}")
+            who = rec["name"] + (f" · {rec['role']}" if rec.get("role") else "")
+            st.caption(f"— {who}")
+
+# Publications Section
+if st.session_state.patrick.get("publications"):
+    st.header("📚 Publications")
+    for pub in st.session_state.patrick["publications"]:
+        with st.container(border=True):
+            st.write(f"**{pub['title']}**")
+            st.caption(pub["date"])
+            st.write(pub["description"])

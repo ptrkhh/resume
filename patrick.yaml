@@ -17,20 +17,23 @@ education:
       - "Formula Student Team Member: Contributed to competitive racing vehicle development and testing"
 
 experience:
-  - company: Alfa Group
-    location: Jakarta, Indonesia
+  - company: Digital Place Vision Pte Ltd
+    location: Singapore / Jakarta, Indonesia
     position: Senior AI Team Lead & R&D Engineer
     year_from: 03 / 2024
     year_to: present
     description: Leading AI innovation initiatives, delivering $500K+ in AI projects with 100% on-time delivery rate
     description_details:
+      - "Real-Time Avatar AI: Built live speech-to-speech LLM & RAG pipeline with lip-synced talking-avatar video streaming (LangChain, Gemini, LoRA, Unsloth)"
       - "Team Leadership: Manage 8-member international AI development team across 3 time zones, achieving 95% sprint completion rate"
+      - "Global Scale: Designed a scalable, reliable routing solution serving 3,500+ retail stores worldwide"
       - "Client Relations: Orchestrate vendor partnerships and client deliverables for enterprise AI implementations"
       - "AI Architecture: Design and develop production-ready LLM & RAG applications using LangChain, Ollama, Gemini, and Unsloth"
       - "Cloud Infrastructure: Deploy scalable AI solutions on GCP with Docker/Kubernetes, supporting 10K+ concurrent users"
       - "Business Impact: Generated measurable ROI through AI automation, reducing client operational costs by 40%"
+      - "Thought Leadership: Author of 'The Promptnicles', a daily LinkedIn series on AI, prompting, and engineering life (4K+ followers)"
 
-  - company: Redigan Store
+  - company: Redigan
     location: Jakarta, Indonesia
     position: Co-Founder & Lead Backend Engineer
     year_from: 12 / 2021
@@ -44,6 +47,7 @@ experience:
       - "Full-Stack Development: Built robust backend using Java/Spring Boot and Go/Gin with Redis caching layer"
       - "Database Architecture: Designed scalable PostgreSQL schema with GORM/Hibernate ORM supporting 100K+ products"
       - "Search Technology: Implemented OpenSearch and PostgreSQL full-text search with sub-second response times"
+      - "CI/CD: Automated and enforced code-quality standards with GitHub Actions pipelines"
       - "AWS Infrastructure: Deployed production systems on AWS (S3, EC2, RDS, OpenSearch) with 99.9% uptime"
       - "Business Development: Managed vendor relationships and digital marketing strategy, growing user base by 300%"
 
@@ -65,12 +69,13 @@ experience:
     location: Jakarta, Indonesia
     position: Machine Learning Engineer
     year_from: 04 / 2019
-    year_to: 09 / 2021
+    year_to: 10 / 2021
     description: Developed production ML services from ground up, achieving 20%+ improvements in model accuracy and 3x performance gains
     description_details:
       - "ML Pipeline Development: Built end-to-end ML services using Python/Flask APIs handling 50K+ daily requests"
-      - "Model Research & Optimization: Evaluated and optimized models using CRF, scikit-learn, TensorFlow, and PyTorch frameworks"
+      - "Model Research & Optimization: Evaluated and optimized models using python-crfsuite, scikit-learn, TensorFlow, and PyTorch frameworks"
       - "Distributed Systems: Implemented RabbitMQ with Apache Avro messaging for reliable, high-throughput data processing"
+      - "IM Gateway: Built a Java service fronting the entire Kata.ai platform, interfacing Telegram and other IM apps via Kafka inter-service messaging and AWS S3 storage"
       - "DevOps & Deployment: Orchestrated containerized deployments using Docker and Kubernetes on Google Cloud Platform"
       - "Legacy System Maintenance: Maintained and enhanced existing Go and Node.js microservices supporting core business operations"
       - "Performance Impact: Delivered measurable improvements in model accuracy (20%+) and inference speed (3x faster)"
@@ -79,7 +84,7 @@ experience:
     location: Gütersloh, Germany
     position: Full-Stack Web Developer
     year_from: 05 / 2018
-    year_to: 11 / 2018
+    year_to: 10 / 2018
     description: Delivered responsive web application for multi-device deployment with comprehensive testing framework
     description_details:
       - "Frontend Development: Created responsive iPad-optimized interface using JavaScript, Vue.js, and modern CSS"
@@ -92,15 +97,56 @@ experience:
     location: Helsinki, Finland (Remote)
     position: Hardware Engineering Intern
     year_from: 11 / 2017
-    year_to: 04 / 2018
+    year_to: 03 / 2018
     description: Designed innovative motorized tablet docking station, earning perfect academic score (4.0 GPA)
     description_details:
       - "Academic Excellence: Achieved perfect grade (1.0 German system / 4.0 GPA) for Bachelor's thesis project"
-      - "Mechanical Design: Created detailed 3D models and technical drawings using SolidWorks CAD software"
+      - "Mechanical Design: Created detailed 3D models and technical drawings using SolidWorks and ANSYS CAD software"
       - "Electronics Engineering: Designed custom PCB circuits using KiCAD for motor control and power management"
       - "Embedded Programming: Developed Arduino-based control system with precise positioning algorithms"
-      - "Manufacturing Optimization: Reduced production costs by 30% through design-for-manufacturing principles"
+      - "Manufacturing Optimization: Reduced production costs by 30% through design-for-manufacturing (FMEA, Design-To-Cost)"
       - "User Experience Design: Applied ergonomic principles to create intuitive, user-friendly product interface"
+
+  - company: Dematic
+    location: Gütersloh, Germany
+    position: Software Engineer
+    year_from: 03 / 2017
+    year_to: 08 / 2017
+    description: Developed FEP (Facility Emulation Platform) software to emulate warehouse facilities
+    description_details:
+      - "Simulation Development: Built warehouse-facility emulation software in C# and Unity 3D, debugged and tested in Visual Studio"
+      - "Solution Design: Proposed design solutions and authored technical documentation"
+      - "Process: Git version control with Agile / JIRA software development workflow"
+
+  - company: Rhine-Waal University
+    location: Kleve, Germany
+    position: Student Assistant
+    year_from: 09 / 2015
+    year_to: 02 / 2017
+    description: Teaching assistant to Prof. Achim Kehrein for "Introductory Mathematics" and "Applied Mathematics"
+    description_details:
+      - "Grading & Feedback: Examined student assignments, gave feedback, and ran plagiarism checks"
+      - "Administration: Recorded and published scores on the Moodle platform"
+
+  - company: Korgel Maschinenbau
+    location: Kleve, Germany
+    position: Metalworking Intern
+    year_from: 05 / 2016
+    year_to: 05 / 2016
+    description: Hands-on metalworking internship
+    description_details:
+      - "Machining: Milling machine, metal lathe, drilling, tapping and dies"
+
+  - company: Theodor-Brauer-Haus
+    location: Kleve, Germany
+    position: Technical Intern
+    year_from: 06 / 2014
+    year_to: 07 / 2014
+    description: Multi-disciplinary technical internship across metalwork, electronics, and logistics
+    description_details:
+      - "Metalwork: Milling, lathe, drilling, tap and dies, hydraulic and pneumatic pumps"
+      - "Electronics: Soldering; worked with LEDs, diodes, and resistors"
+      - "Logistics: Pallet handling, packaging, and forklift operation"
 
 skill:
   - icon: 🧠
@@ -116,6 +162,11 @@ skill:
       - Model Optimization (SHAP, LightGBM)
       - MLOps & Model Deployment
       - Generative AI (GPT, Gemini)
+      - Real-Time Speech-to-Speech AI
+      - Lip-Sync / Talking Avatars (MuseTalk)
+      - Voice Cloning & Text-to-Speech (TTS)
+      - LoRA & Unsloth Fine-Tuning
+      - GPU Inference Optimization (torch.compile)
 
   - icon: 💻
     title: Software Engineering
@@ -128,6 +179,8 @@ skill:
       - PostgreSQL & Redis
       - Docker & Kubernetes
       - Apache Kafka & RabbitMQ
+      - FastAPI & WebSocket Streaming
+      - Protocol Buffers (Protobuf)
       - Git & CI/CD Pipelines
       - Test-Driven Development
 
@@ -142,6 +195,7 @@ skill:
       - Monitoring & Observability
       - Auto-scaling & Load Balancing
       - Security Best Practices
+      - GCP Cloud Run (Serverless Containers)
       - Cost Optimization
       - Disaster Recovery
 
@@ -160,10 +214,11 @@ skill:
       - Business Development
 
 project:
+  "Real-Time Lipsync Avatar Streaming: MuseTalk speech-to-video pipeline with sub-second latency, MPEG-TS over WebSocket, GCP Cloud Run (FastAPI + torch.compile)": ""
   "Enterprise AI Platform: Zero-code ML classifier with intuitive GUI (scikit-learn + Tkinter)": "https://gitlab.com/patrick.hermawan/ai-in-123"
   "Smart PC Builder: AI-powered hardware recommendation system (TensorFlow + Reddit API)": "https://gitlab.com/patrick.hermawan/buildmeapc"
   "Automotive Analytics: Fuel consumption prediction model (PyTorch + Polars)": "https://github.com/ptrkhh/wheelsaroundme"
-  "Interactive AI Resume: Conversational resume with LLM integration (Streamlit + LangChain)": ""
+  "Interactive AI Resume: Conversational resume with LLM integration (Streamlit + Google Gemini)": ""
 
 contact:
   LinkedIn:
@@ -191,6 +246,118 @@ languages:
   - Bahasa Indonesia (Native)
   - English (Fluent)
   - German (Professional)
+
+recommendations:
+  - name: Nathan Ansel
+    role: "Data Scientist & AI Engineer | ASEAN Undergraduate Scholar"
+    text: >-
+      Patrick demonstrated exceptional leadership as he spearheaded a generative AI
+      project to develop an advanced chatbot with both speech-to-speech and
+      text-to-text conversational capabilities. Having worked closely with him, I was
+      consistently inspired by his strongly-driven passion for work, creative
+      problem-solving abilities, and concurrently a well-timed sense of humor.
+
+      What stood out most to me was Patrick's visionary approach to the project. He
+      consistently thought several steps ahead, iterating and designing system
+      architectures that not only enhanced performance but also laid a robust
+      foundation for the future scalability and success of our system.
+
+      Patrick is not just a leader with technical expertise; he is also a
+      collaborative team player who inspires trust, encourages growth, and brings out
+      the best in those around him.
+  - name: Alesandro Michael Ferdinand
+    role: "Frontend Engineer at Rukita"
+    text: >-
+      "Passionate yet chill engineer" might be the best headline that I can give for
+      Patrick. We worked together for around half a year, developing more than 5
+      challenging features with high complexity. I was entrusted with developing the
+      Frontend side, while Patrick tackled the business complexity on the Backend side
+      for these features. Patrick understood the features really well and delivered
+      mesmerizing results at the end of each sprint. One of the most meaningful things
+      that I learned from Patrick was to approach our work in an enjoyable way and to
+      take a deep breath when things are at their peak. Patrick is one of a kind, so
+      do not miss the chance to have him as your Nakama!
+  - name: Fahri Alfan
+    role: "SQA Engineer"
+    text: >-
+      I was working with Patrick while he was assigned as Senior Backend Engineer
+      (Golang). He is able to do attitude and good personality. A nice senior that
+      help troubleshoot a bug and much more. It was nice working with him.
+  - name: Bagas Tri Wibowo
+    role: "Backend Engineer at CFX Indonesia | Golang, JavaScript"
+    text: >-
+      Patrick has a very unique character that most people don't have. You can expect
+      that Patrick will always have a unique solution to every problem. In addition,
+      Patrick has a willingness to learn and a high level of curiosity.
+  - name: Lusiono
+    role: "Product Enthusiast"
+    text: >-
+      Patrick is one of the best individuals I have encountered in my work. A person
+      who is curious and thinks outside the box. He possesses exceptional skills in
+      backend development and data. Collaborating with others, his joy and
+      friendliness greatly enhance the team's dynamics and contribute to an overall
+      sense of joy.
+  - name: Arya
+    role: "CTO at Redikru"
+    text: >-
+      I had the pleasure of collaborating with Patrick for more than a year. Patrick's
+      curiosity and fun-loving spirit make him a gem to work with. What sets him apart
+      is his knack for thinking outside the box—his ability to come up with innovative
+      ideas adds a refreshing twist to the team dynamic. He would be a great addition
+      to any team.
+  - name: Aliansyah Firdaus
+    role: "Frontend Developer | Software Developer"
+    text: >-
+      As a talented backend developer, he has exceptional technical skills and a
+      passion for technology that makes him excel in his role. He's also a friendly
+      and approachable person who welcomes everyone as a friend. He would be a
+      valuable addition to any team or organization.
+  - name: Ansari Milah Ibrahim
+    role: "Technical Lead, Golang & Java"
+    text: >-
+      I work with Patrick in the same team. He is curious, smart and always brings joy
+      in the team. He is such a great person to work with — someone who can help you
+      with your work and be a friend outside of work, just like what he did when he
+      helped me in my first month working in Redigan.
+  - name: Elvis Ajah
+    role: "Electrical & Electronics Engineering"
+    text: >-
+      One of those rare, talented and well-organised mates. I can't forget the Mobile
+      Information and Devices lab you and I did together — your report on battery max
+      power tracking was outstanding. A very fun-filled guy, yet focused and
+      determined, and up to date with most technological innovations.
+  - name: Konstantinos Karatsevidis
+    text: >-
+      Worked with Patrick on a project together. He is an outstanding critical thinker
+      with good follow-up skills and a great ability to deliver high-quality results.
+      Patrick has a good understanding of both business and engineering needs and is
+      able to bridge the communication gap. I want to work more with Patrick in the
+      future on projects involving complex mechanical designs.
+  - name: Stephen Kurniawan
+    role: "Machine Learning Engineer | AI & LLM Specialist | RAG Expert"
+    text: >-
+      I met Patrick when we were students at a university in Germany. He is obsessed
+      with technology, especially consumer gadgets and automobiles. He consumes every
+      news regarding the latest electronics and the know-how regularly. During our
+      project together, he was a terrific partner and able to learn a new skill set in
+      such a short time. I'm proud to reference him directly should it be needed.
+  - name: Ammar Hassan
+    role: "Project Engineer at Calanbau"
+    text: >-
+      Enjoyed working with Patrick during the development of the Driving Simulator
+      project at university.
+  - name: Miltos Stavridis
+    role: "Partner & Board Member | HubSpot Diamond Partner"
+    text: >-
+      Patrick is an exceptional hardware specialist. He assisted me and my team in
+      buying and maintaining appropriate hardware components which were very pricey as
+      well as important due to their functionality. He is really a
+      Tech-Software-Hardware Guru! I can recommend him for any hardware-related topics.
+
+publications:
+  - title: "Surface Pro 3 WIMBoot Guide + Discussion"
+    date: November 28, 2014
+    description: "Guide for creating Microsoft Windows 8.1 WIMBoot deployment images to save storage space on the Surface Pro 3, including a walkthrough for building custom WIMBoot images."
 
 birthday: March 15, 1995
 birthplace: Jakarta, Indonesia

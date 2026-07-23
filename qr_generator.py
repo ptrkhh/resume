@@ -33,5 +33,5 @@ ORG:{data['title']}
 ROLE:{data['title']}
 TITLE:{data['title']}
 NOTE:{data['summary']}
-URL:https://resumepatrick.streamlit.app
+URL:https://contactpatrick.streamlit.app
 END:VCARD"""

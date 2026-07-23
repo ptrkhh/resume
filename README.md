@@ -30,7 +30,7 @@ streamlit run resume.py
 ## Tech Stack
 
 - **Frontend**: Streamlit with custom CSS
-- **AI**: Google Gemini via LangChain
+- **AI**: Google Gemini via the `google-genai` SDK
 - **Data**: JSON-based resume content
 - **Styling**: Custom CSS with gradient themes
 
