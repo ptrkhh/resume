@@ -5,8 +5,6 @@ from google.genai import types
 
 
 def initialize_llm(profile):
-    client = genai.Client(api_key=st.secrets["GOOGLE_API_KEY"])
-
     system_prompt = f"""You are Patrick's AI career assistant, helping recruiters and hiring managers learn about his qualifications. Be conversational, enthusiastic, and highlight his strengths naturally.
 
 Key guidelines:
@@ -20,24 +18,31 @@ Patrick's Profile:
 {yaml.dump(profile)}
 
 Respond professionally but with personality - you're representing a talented candidate who's excited about new opportunities."""
+    # Return just the prompt. We build a fresh genai.Client per request instead
+    # of persisting a live chat object: Streamlit reruns the script on every
+    # interaction, and a client cached in session_state gets its underlying
+    # httpx client closed between reruns ("Cannot send a request, as the client
+    # has been closed"). History is already kept in session_state.chat_history.
+    return system_prompt
 
-    # chats.create keeps conversation history for us; thinking_budget=0 keeps the
-    # short-answer bot fast/cheap and stops thinking tokens eating the output budget.
-    convo = client.chats.create(
+
+def ask_bot(input_text):
+    contents = []
+    for role, text in st.session_state.chat_history:
+        contents.append(types.Content(
+            role="user" if role == "user" else "model",
+            parts=[types.Part(text=text)],
+        ))
+    contents.append(types.Content(role="user", parts=[types.Part(text=input_text)]))
+
+    client = genai.Client(api_key=st.secrets["GOOGLE_API_KEY"])
+    response = client.models.generate_content(
         model="gemini-2.5-flash",
+        contents=contents,
         config=types.GenerateContentConfig(
-            system_instruction=system_prompt,
+            system_instruction=st.session_state.convo,
             max_output_tokens=500,
             thinking_config=types.ThinkingConfig(thinking_budget=0),
         ),
     )
-    # Keep the Client alive for the whole session. Without a reference it gets
-    # garbage-collected, its __del__ closes the underlying httpx client, and the
-    # next send_message fails with "Cannot send a request, as the client has been
-    # closed" (works on the first message, breaks on later ones).
-    st.session_state._genai_client = client
-    return convo
-
-
-def ask_bot(input_text):
-    return st.session_state.convo.send_message(input_text).text
+    return response.text
