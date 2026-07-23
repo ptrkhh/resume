@@ -111,7 +111,7 @@ if user_question := st.chat_input("Try asking about hobbies, experience, or skil
 # Professional Experience Section
 st.header("💼 Professional Experience")
 
-for experience in st.session_state.patrick["experience"][:3]:
+for experience in st.session_state.patrick["experience"][:4]:
     with st.container(border=True):
         st.subheader(f"🏢 {experience['company']} - {experience['location']}")
         st.write(f"**{experience['position']}**")
@@ -162,7 +162,7 @@ for skill_category in st.session_state.patrick["skill"]:
 # Recommendations Section
 if st.session_state.patrick.get("recommendations"):
     st.header("🌟 Recommendations")
-    for rec in st.session_state.patrick["recommendations"]:
+    for rec in st.session_state.patrick["recommendations"][:4]:
         with st.container(border=True):
             st.markdown(f"> {rec['text']}")
             who = rec["name"] + (f" · {rec['role']}" if rec.get("role") else "")

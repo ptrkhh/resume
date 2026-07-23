@@ -1,6 +1,6 @@
 name: Patrick Hermawan
-title: AI/ML Engineer & Team Lead
-summary: AI/ML engineer and team lead with seven years across machine learning, backend, and cloud infrastructure. Currently leads an 8-person team building real-time speech-to-speech avatar systems and production LLM/RAG platforms for enterprise clients, with $500K+ in delivered AI projects.
+title: AI/ML Engineering Lead
+summary: AI/ML engineering leader with seven years across machine learning, backend, and cloud, now leading an 8-person team that has delivered $500K+ in production AI for enterprise clients. Recent work spans real-time speech-to-speech avatars, LLM/RAG platforms, and a routing layer serving 3,500+ retail stores worldwide.
 
 education:
   - institute: Rhine-Waal University of Applied Sciences
@@ -8,7 +8,7 @@ education:
     degree: Bachelor of Science in Mechatronic Engineering
     year_from: 09 / 2014
     year_to: 09 / 2018
-    description: Strong academic foundation in engineering with leadership experience and practical project implementation
+    description: Interdisciplinary mechatronics degree combining software, electronics, and mechanical engineering.
     description_details:
       - "Specialized in: Advanced 3D CAD Design, Object-Oriented Programming, Mobile Systems, Automotive Technology"
       - "Academic Excellence: GPA 3.4/4.0 (Grade 1.9 German system) - Above Average Performance"
@@ -42,18 +42,6 @@ experience:
       - "Halved infrastructure costs by consolidating AWS services (S3, EC2, RDS, OpenSearch) with zero downtime"
       - "Ran CI/CD and code-quality gates on GitHub Actions"
 
-  - company: Predictnow.ai
-    location: Ontario, Canada (Remote)
-    position: Senior Machine Learning Engineer
-    year_from: 09 / 2020
-    year_to: 12 / 2020
-    description: Turned an ML prototype into a production prediction service
-    description_details:
-      - "Built the Flask ML API serving the platform's daily predictions"
-      - "Improved model performance with LightGBM and SHAP explainability"
-      - "Added Ray.io distributed computing and Honeycomb.io observability"
-      - "Published the platform's Python client on PyPI"
-
   - company: Kata.ai
     location: Jakarta, Indonesia
     position: Machine Learning Engineer
@@ -65,6 +53,18 @@ experience:
       - "Built the Java IM gateway fronting the whole platform, connecting Telegram and other messaging apps via Kafka and S3"
       - "Ran RabbitMQ + Apache Avro messaging for high-throughput data processing"
       - "Deployed with Docker and Kubernetes on GCP; maintained Go and Node.js microservices"
+
+  - company: Predictnow.ai
+    location: Ontario, Canada (Remote)
+    position: Senior Machine Learning Engineer
+    year_from: 09 / 2020
+    year_to: 12 / 2020
+    description: Turned an ML prototype into a production prediction service
+    description_details:
+      - "Built the Flask ML API serving the platform's daily predictions"
+      - "Improved model performance with LightGBM and SHAP explainability"
+      - "Added Ray.io distributed computing and Honeycomb.io observability"
+      - "Published the platform's Python client on PyPI"
 
   - company: MIA3 GmbH
     location: Gütersloh, Germany
@@ -172,7 +172,7 @@ project:
   "Enterprise AI Platform: Zero-code ML classifier with intuitive GUI (scikit-learn + Tkinter)": "https://gitlab.com/patrick.hermawan/ai-in-123"
   "Smart PC Builder: AI-powered hardware recommendation system (TensorFlow + Reddit API)": "https://gitlab.com/patrick.hermawan/buildmeapc"
   "Automotive Analytics: Fuel consumption prediction model (PyTorch + Polars)": "https://github.com/ptrkhh/wheelsaroundme"
-  "Interactive AI Resume: Conversational resume with LLM integration (Streamlit + Google Gemini)": ""
+  "Interactive AI Resume: Conversational resume with LLM integration (Streamlit + Google Gemini)": "https://github.com/ptrkhh/resume"
 
 contact:
   LinkedIn:
@@ -219,6 +219,28 @@ recommendations:
       Patrick is not just a leader with technical expertise; he is also a
       collaborative team player who inspires trust, encourages growth, and brings out
       the best in those around him.
+  - name: Konstantinos Karatsevidis
+    text: >-
+      Worked with Patrick on a project together. He is an outstanding critical thinker
+      with good follow-up skills and a great ability to deliver high-quality results.
+      Patrick has a good understanding of both business and engineering needs and is
+      able to bridge the communication gap. I want to work more with Patrick in the
+      future on projects involving complex mechanical designs.
+  - name: Lusiono
+    role: "Product Enthusiast"
+    text: >-
+      Patrick is one of the best individuals I have encountered in my work. A person
+      who is curious and thinks outside the box. He possesses exceptional skills in
+      backend development and data. Collaborating with others, his joy and
+      friendliness greatly enhance the team's dynamics and contribute to an overall
+      sense of joy.
+  - name: Aliansyah Firdaus
+    role: "Frontend Developer | Software Developer"
+    text: >-
+      As a talented backend developer, he has exceptional technical skills and a
+      passion for technology that makes him excel in his role. He's also a friendly
+      and approachable person who welcomes everyone as a friend. He would be a
+      valuable addition to any team or organization.
   - name: Alesandro Michael Ferdinand
     role: "Frontend Engineer at Rukita"
     text: >-
@@ -243,14 +265,6 @@ recommendations:
       Patrick has a very unique character that most people don't have. You can expect
       that Patrick will always have a unique solution to every problem. In addition,
       Patrick has a willingness to learn and a high level of curiosity.
-  - name: Lusiono
-    role: "Product Enthusiast"
-    text: >-
-      Patrick is one of the best individuals I have encountered in my work. A person
-      who is curious and thinks outside the box. He possesses exceptional skills in
-      backend development and data. Collaborating with others, his joy and
-      friendliness greatly enhance the team's dynamics and contribute to an overall
-      sense of joy.
   - name: Arya
     role: "CTO at Redikru"
     text: >-
@@ -259,13 +273,6 @@ recommendations:
       is his knack for thinking outside the box—his ability to come up with innovative
       ideas adds a refreshing twist to the team dynamic. He would be a great addition
       to any team.
-  - name: Aliansyah Firdaus
-    role: "Frontend Developer | Software Developer"
-    text: >-
-      As a talented backend developer, he has exceptional technical skills and a
-      passion for technology that makes him excel in his role. He's also a friendly
-      and approachable person who welcomes everyone as a friend. He would be a
-      valuable addition to any team or organization.
   - name: Ansari Milah Ibrahim
     role: "Technical Lead, Golang & Java"
     text: >-
@@ -280,13 +287,6 @@ recommendations:
       Information and Devices lab you and I did together — your report on battery max
       power tracking was outstanding. A very fun-filled guy, yet focused and
       determined, and up to date with most technological innovations.
-  - name: Konstantinos Karatsevidis
-    text: >-
-      Worked with Patrick on a project together. He is an outstanding critical thinker
-      with good follow-up skills and a great ability to deliver high-quality results.
-      Patrick has a good understanding of both business and engineering needs and is
-      able to bridge the communication gap. I want to work more with Patrick in the
-      future on projects involving complex mechanical designs.
   - name: Stephen Kurniawan
     role: "Machine Learning Engineer | AI & LLM Specialist | RAG Expert"
     text: >-

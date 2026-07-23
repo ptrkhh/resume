@@ -96,7 +96,7 @@ def _card_html(p):
         ("Location", d["current_location"]),
     ] + [
         (name, p["contact"][name]["link"].split("//")[-1].removeprefix("www."))
-        for name in ("LinkedIn", "GitHub", "Instagram")
+        for name in ("LinkedIn", "GitHub")
         if name in p["contact"]
     ]
     trs = "".join(
