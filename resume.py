@@ -46,6 +46,7 @@ with st.container(border=True):
     with col1:
         st.title(f"{st.session_state.patrick['name']}")
         st.subheader(st.session_state.patrick['title'])
+        st.write(st.session_state.patrick["summary"])
         st.write(f"📍 {st.session_state.patrick['personal_data']['current_location']}")
         st.write(f"📧 {st.session_state.patrick['personal_data']['email']}")
         st.write(f"📱 {st.session_state.patrick['personal_data']['phone_number']}")
@@ -83,10 +84,6 @@ with col3:
     )
 
 st.divider()
-
-# Resume Content Section
-st.header("📋 Professional Resume")
-st.write(st.session_state.patrick["summary"])
 
 # Interactive chat section
 st.header(f"💬 Chat with {st.session_state.patrick['name']}'s AI Assistant")
