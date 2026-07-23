@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import streamlit as st
 import yaml
 from streamlit_js_eval import streamlit_js_eval
@@ -11,6 +13,17 @@ if "convo" not in st.session_state:
     with open("patrick.yaml") as f:
         st.session_state.patrick = yaml.safe_load(f)
     st.session_state.convo = initialize_llm(st.session_state.patrick)
+
+    # Write downloadables to static/ (served at app/static/<name>). Real
+    # same-origin URLs download reliably on mobile Firefox, where data:/blob
+    # downloads don't. Regenerated per session so they track patrick.yaml.
+    p = st.session_state.patrick
+    base = p["name"].replace(" ", "_")
+    static = Path("static")
+    static.mkdir(exist_ok=True)
+    (static / f"{base}_Resume.pdf").write_bytes(generate_resume_pdf(p).getvalue())
+    (static / f"{base}_Contact_Card.pdf").write_bytes(generate_contact_card_pdf(p).getvalue())
+    (static / f"{base}_Contact.vcf").write_text(vcard_content())
 
 # Page configuration
 PAGE_TITLE = "Resume | " + st.session_state.patrick["name"]
@@ -48,24 +61,20 @@ with contact_col:
             for platform, info in st.session_state.patrick["contact"].items():
                 st.link_button(f'{info["icon"]} {platform}', info["link"], use_container_width=True)
 
-            st.download_button(
-                label="📄 Download Resume",
-                data=generate_resume_pdf(st.session_state.patrick),
-                file_name=f"{st.session_state.patrick['name'].replace(' ', '_')}_Resume.pdf",
-                mime="application/pdf",
+            st.link_button(
+                "📄 Download Resume",
+                f"app/static/{st.session_state.patrick['name'].replace(' ', '_')}_Resume.pdf",
                 use_container_width=True,
-                type="primary"
+                type="primary",
             )
 
     # Contact card action buttons
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.download_button(
-            label="🖨️ Print Contact Card",
-            data=generate_contact_card_pdf(st.session_state.patrick),
-            file_name=f"{st.session_state.patrick['name'].replace(' ', '_')}_Contact_Card.pdf",
-            mime="application/pdf",
-            use_container_width=True
+        st.link_button(
+            "🖨️ Print Contact Card",
+            f"app/static/{st.session_state.patrick['name'].replace(' ', '_')}_Contact_Card.pdf",
+            use_container_width=True,
         )
 
     with col2:
@@ -74,12 +83,10 @@ with contact_col:
             st.image(qr_image, caption="Scan to save contact info", width=200)
 
     with col3:
-        st.download_button(
-            label="💾 Download Contact",
-            data=vcard_content(),
-            file_name=f"{st.session_state.patrick['name'].replace(' ', '_')}_Contact.vcf",
-            mime="text/vcard",
-            use_container_width=True
+        st.link_button(
+            "💾 Download Contact",
+            f"app/static/{st.session_state.patrick['name'].replace(' ', '_')}_Contact.vcf",
+            use_container_width=True,
         )
 
 st.divider()
