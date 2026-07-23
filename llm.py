@@ -23,7 +23,7 @@ Respond professionally but with personality - you're representing a talented can
 
     # chats.create keeps conversation history for us; thinking_budget=0 keeps the
     # short-answer bot fast/cheap and stops thinking tokens eating the output budget.
-    return client.chats.create(
+    convo = client.chats.create(
         model="gemini-2.5-flash",
         config=types.GenerateContentConfig(
             system_instruction=system_prompt,
@@ -31,6 +31,12 @@ Respond professionally but with personality - you're representing a talented can
             thinking_config=types.ThinkingConfig(thinking_budget=0),
         ),
     )
+    # Keep the Client alive for the whole session. Without a reference it gets
+    # garbage-collected, its __del__ closes the underlying httpx client, and the
+    # next send_message fails with "Cannot send a request, as the client has been
+    # closed" (works on the first message, breaks on later ones).
+    st.session_state._genai_client = client
+    return convo
 
 
 def ask_bot(input_text):
