@@ -165,3 +165,8 @@ cython_debug/
 # Generated downloadables (written to static/ at runtime; keep the dir via .gitkeep)
 static/*.pdf
 static/*.vcf
+
+__pycache__/
+static/*.pdf
+static/*.vcf
+test_*.pdf

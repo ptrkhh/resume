@@ -20,9 +20,10 @@ def vcard_content():
     with open('patrick.yaml', 'r') as f:
         data = yaml.safe_load(f)
 
+    first, _, last = data['name'].partition(" ")
     return f"""BEGIN:VCARD
 VERSION:3.0
-N:Hermawan;Patrick;;;
+N:{last};{first};;;
 FN:{data['name']}
 GENDER:M
 EMAIL:{data['personal_data']['email']}

@@ -1,6 +1,5 @@
 streamlit
-streamlit_js_eval
 google-genai
-reportlab
+weasyprint
 pyyaml
 qrcode[pil]
