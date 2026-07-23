@@ -21,18 +21,22 @@ def vcard_content():
         data = yaml.safe_load(f)
 
     first, _, last = data['name'].partition(" ")
+    # Escape text values per RFC 2426: backslash, comma, semicolon, newline.
+    # Without this, the comma in the summary truncates NOTE in strict readers.
+    esc = lambda s: s.replace("\\", "\\\\").replace(",", "\\,").replace(";", "\\;").replace("\n", "\\n")
+    company = data['experience'][0]['company']  # current employer -> ORG
     return f"""BEGIN:VCARD
 VERSION:3.0
 N:{last};{first};;;
-FN:{data['name']}
+FN:{esc(data['name'])}
 GENDER:M
 EMAIL:{data['personal_data']['email']}
 TEL:{data['personal_data']['phone_number'].replace("-", "")}
 ADR;TYPE=home:;;;Jakarta;Jakarta;;Indonesia
 GEO:-6.21462;106.84513
-ORG:{data['title']}
-ROLE:{data['title']}
-TITLE:{data['title']}
-NOTE:{data['summary']}
+ORG:{esc(company)}
+ROLE:{esc(data['title'])}
+TITLE:{esc(data['title'])}
+NOTE:{esc(data['summary'])}
 URL:https://contactpatrick.streamlit.app
 END:VCARD"""
