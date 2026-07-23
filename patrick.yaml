@@ -18,8 +18,8 @@ education:
 
 experience:
   - company: Digital Place Vision Pte Ltd
-    location: Singapore / Jakarta, Indonesia
-    position: Senior AI Team Lead & R&D Engineer
+    location: Jakarta, Indonesia
+    position: Team Lead + R&D Engineer
     year_from: 03 / 2024
     year_to: present
     description: Leading AI innovation initiatives, delivering $500K+ in AI projects with 100% on-time delivery rate
@@ -31,16 +31,14 @@ experience:
       - "AI Architecture: Design and develop production-ready LLM & RAG applications using LangChain, Ollama, Gemini, and Unsloth"
       - "Cloud Infrastructure: Deploy scalable AI solutions on GCP with Docker/Kubernetes, supporting 10K+ concurrent users"
       - "Business Impact: Generated measurable ROI through AI automation, reducing client operational costs by 40%"
-      - "Thought Leadership: Author of 'The Promptnicles', a daily LinkedIn series on AI, prompting, and engineering life (4K+ followers)"
 
   - company: Redigan
     location: Jakarta, Indonesia
-    position: Co-Founder & Lead Backend Engineer
+    position: Co-Founder + Backend Engineer + Social Media Specialist
     year_from: 12 / 2021
     year_to: 12 / 2023
     description: Built and scaled e-commerce platform from MVP to production, serving thousands of customers
     description_details:
-      - "Technical Leadership: Led cross-functional team of 6 developers, PMs, and business stakeholders for 12 months"
       - "AI Integration: Implemented ChatGPT-powered product recommendation system, increasing conversion rate by 25%"
       - "Enterprise Integrations: Architected seamless APIs with major vendors (BCA Bank, Shipper Logistics, AWS Textract)"
       - "Cost Optimization: Reduced infrastructure costs by 50% through strategic service consolidation with zero downtime"
@@ -214,7 +212,6 @@ skill:
       - Business Development
 
 project:
-  "Real-Time Lipsync Avatar Streaming: MuseTalk speech-to-video pipeline with sub-second latency, MPEG-TS over WebSocket, GCP Cloud Run (FastAPI + torch.compile)": ""
   "Enterprise AI Platform: Zero-code ML classifier with intuitive GUI (scikit-learn + Tkinter)": "https://gitlab.com/patrick.hermawan/ai-in-123"
   "Smart PC Builder: AI-powered hardware recommendation system (TensorFlow + Reddit API)": "https://gitlab.com/patrick.hermawan/buildmeapc"
   "Automotive Analytics: Fuel consumption prediction model (PyTorch + Polars)": "https://github.com/ptrkhh/wheelsaroundme"
@@ -229,10 +226,10 @@ contact:
     link: mailto:patrick.hermawan@outlook.com
   WhatsApp:
     icon: 🟢
-    link: https://wa.me/6285158596077
+    link: https://wa.me/6288210018888
   Telegram:
     icon: 🔵
-    link: https://t.me/+6285158596077
+    link: https://t.me/+6288210018888
   GitHub:
     icon: 🐙
     link: https://www.github.com/ptrkhh
@@ -354,17 +351,12 @@ recommendations:
       well as important due to their functionality. He is really a
       Tech-Software-Hardware Guru! I can recommend him for any hardware-related topics.
 
-publications:
-  - title: "Surface Pro 3 WIMBoot Guide + Discussion"
-    date: November 28, 2014
-    description: "Guide for creating Microsoft Windows 8.1 WIMBoot deployment images to save storage space on the Surface Pro 3, including a walkthrough for building custom WIMBoot images."
-
 birthday: March 15, 1995
 birthplace: Jakarta, Indonesia
 
 personal_data:
   current_location: Jakarta, Indonesia
-  phone_number: "+628-51-58-59-60-77"
+  phone_number: "+62-882-1001-8888"
   email: "patrick.hermawan@outlook.com"
   interests_hobbies:
     - Artificial Intelligence & Machine Learning
@@ -381,6 +373,7 @@ personal_data:
     - "Automotive expertise: Can identify car models by dashboard design"
     - "Cross-cultural communication: Fluent in 3 languages"
     - "Rapid prototyping: From concept to MVP in record time"
+    - "Author of 'The Promptnicles', a daily LinkedIn series on AI, prompting, and engineering life (4K+ followers)"
   favorite_food: Carbonara
   favorite_song: I'm Yours by Jason Mraz
   relationship_status: Single, fully committed to career growth
