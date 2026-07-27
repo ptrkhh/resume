@@ -25,8 +25,8 @@ if "convo" not in st.session_state:
     (static / f"{base}_Contact_Card.pdf").write_bytes(generate_contact_card_pdf(p).getvalue())
     (static / f"{base}_Contact.vcf").write_text(vcard_content())
 
-    # QR of the vCard, embedded straight into the contact card (scan to save).
-    st.session_state.qr_datauri = vcard_qr_datauri()
+    # QR of the vCard, etched into the metal card's QR plate (scan to save).
+    st.session_state.qr_datauri = vcard_qr_datauri(fill="#111418", back="#f2f3f5")
 
 p = st.session_state.patrick
 base = p["name"].replace(" ", "_")

@@ -1,9 +1,11 @@
-"""Modern-minimalist monochrome theme: CSS + HTML component builders.
+"""Theme: CSS + HTML component builders.
 
-Design language: a single editorial grayscale system (Space Grotesk / Inter /
-JetBrains Mono) where drama comes from typography, layout and motion rather
-than colour. The page splits into two clearly separated zones -- a self-
-contained "digital contact card" up top, then the numbered resume below.
+The digital contact card is reimagined as a tactile, skeuomorphic metal NFC
+business card -- a physical object resting on the dark page (brushed-metal
+surface, foil monogram seal, etched EMV chip + contactless glyph, embossed
+name, engraved contact lines, raised social studs, a laser-etched QR plate and
+pressed-metal action keys). Below it, the resume keeps a flat, monochrome
+editorial system (Space Grotesk / Inter / JetBrains Mono).
 """
 
 from html import escape
@@ -17,6 +19,13 @@ def _join(parts):
     # Elements are emitted one-per-string with no indentation so Streamlit's
     # markdown never mistakes leading whitespace for a code block.
     return "".join(parts)
+
+
+# Inline line icons (etched into the metal via currentColor).
+_IC_MAIL = '<svg class="mi" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg>'
+_IC_PHONE = '<svg class="mi" viewBox="0 0 24 24"><path d="M6.5 3h3l1.5 4.5-2 1.2a12 12 0 0 0 5.3 5.3l1.2-2 4.5 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.2 2 2 0 0 1 6.5 3z"/></svg>'
+_IC_PIN = '<svg class="mi" viewBox="0 0 24 24"><path d="M12 21c4.5-4.2 7-7.3 7-10.5A7 7 0 1 0 5 10.5C5 13.7 7.5 16.8 12 21z"/><circle cx="12" cy="10" r="2.4"/></svg>'
+_IC_NFC = '<svg class="nfc" viewBox="0 0 24 24"><path d="M6.5 8.5a7 7 0 0 1 0 7"/><path d="M10 6.5a11 11 0 0 1 0 11"/><path d="M13.5 5a15 15 0 0 1 0 14"/></svg>'
 
 
 THEME_CSS = """
@@ -54,70 +63,127 @@ a:hover{color:var(--white);}
 *::-webkit-scrollbar-thumb{background:#2c343b;border-radius:10px;}
 *::-webkit-scrollbar-thumb:hover{background:#39424a;}
 
-/* ---------- contact card ---------- */
-.vcard{
-  position:relative; overflow:hidden;
-  background:linear-gradient(155deg,#242c33 0%,#1a1f24 52%,#171b20 100%);
-  border:1px solid #333c44; border-radius:22px;
-  padding:2.1rem 2.2rem 1.8rem;
-  box-shadow:0 34px 70px -34px rgba(0,0,0,.85);
+/* ---------- skeuomorphic metal contact card ---------- */
+.mstage{padding:.4rem 0 .2rem;}
+.mcard{
+  position:relative; overflow:hidden; border-radius:22px;
+  padding:2rem 2.1rem 1.7rem;
+  transform:rotate(-.5deg);
+  transition:transform .55s cubic-bezier(.2,.8,.2,1), box-shadow .55s ease;
   animation:fadeUp .7s ease both;
+  background:
+    repeating-linear-gradient(122deg, rgba(255,255,255,.016) 0 1px, transparent 1px 4px),
+    radial-gradient(140% 120% at 8% -10%, rgba(255,255,255,.05), rgba(255,255,255,0) 42%),
+    linear-gradient(150deg,#2b2f35 0%,#1e2228 44%,#141619 76%,#20242a 100%);
+  border:1px solid #3b4149;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.15),
+    inset 0 0 0 1px rgba(255,255,255,.018),
+    inset 0 -2px 4px rgba(0,0,0,.55),
+    0 2px 3px rgba(0,0,0,.4),
+    0 44px 74px -34px rgba(0,0,0,.95);
 }
-.vcard::before{
-  content:""; position:absolute; top:0; left:0; right:0; height:1px;
-  background:linear-gradient(90deg,transparent,rgba(211,211,211,.55),transparent);
+.mcard::before{ /* soft top-left light source */
+  content:""; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background:linear-gradient(158deg, rgba(255,255,255,.09), rgba(255,255,255,0) 24%);
 }
-.vcard-main{display:grid; grid-template-columns:1fr auto; gap:2rem; align-items:start;}
-.eyebrow{
-  font-family:var(--font-mono); font-size:.7rem; letter-spacing:.28em;
-  color:var(--dim); text-transform:uppercase;
-  display:flex; align-items:center; gap:.65em; margin-bottom:1.05rem;
+.mcard::after{ /* diagonal sheen that sweeps on hover */
+  content:""; position:absolute; top:-60%; left:-40%; width:55%; height:220%; z-index:0;
+  background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.055), rgba(255,255,255,0));
+  transform:rotate(16deg); pointer-events:none; transition:left .85s ease;
 }
-.pulse{
-  width:7px; height:7px; border-radius:50%; background:#cfd6dc;
-  box-shadow:0 0 0 0 rgba(207,214,220,.55); animation:pulse 2.4s infinite;
+.mcard:hover{
+  transform:rotate(0deg) translateY(-4px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.17), inset 0 -2px 4px rgba(0,0,0,.55),
+    0 2px 3px rgba(0,0,0,.4), 0 56px 92px -36px rgba(0,0,0,.98);
 }
-.hero-name{
-  font-family:var(--font-display); font-weight:700;
-  font-size:clamp(2.5rem,7vw,4.1rem); line-height:.98; letter-spacing:-.02em; margin:0;
-  background:linear-gradient(135deg,#ffffff 0%,#cfd6dc 46%,#7f8c98 100%);
+.mcard:hover::after{left:120%;}
+.mcard>*{position:relative; z-index:1;}
+
+.mtop{display:flex; justify-content:space-between; align-items:flex-start;}
+.seal{
+  width:54px; height:54px; border-radius:50%; display:grid; place-items:center;
+  font-family:var(--font-display); font-weight:700; font-size:1.15rem; letter-spacing:.02em;
+  background:linear-gradient(145deg,#30353b,#171a1e);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.2), inset 0 -2px 5px rgba(0,0,0,.75), 0 1px 2px rgba(0,0,0,.6);
+}
+.seal span{
+  background:linear-gradient(135deg,#f6f8fa,#aeb6bf 50%,#6f767e);
   -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 1px 0 rgba(0,0,0,.5));
 }
-.hero-role{
-  font-family:var(--font-display); font-weight:500;
-  font-size:clamp(1.02rem,2.5vw,1.4rem); color:var(--slate-lt); margin:.65rem 0 0;
+.mtech{display:flex; align-items:center; gap:.85rem; padding-top:.3rem;}
+.nfc{width:22px; height:22px; fill:none; stroke:#9aa1a8; stroke-width:1.7; stroke-linecap:round; opacity:.85;}
+.chip{
+  width:40px; height:31px; border-radius:6px; position:relative; flex:none;
+  background:linear-gradient(150deg,#eef1f4,#c2c8ce 45%,#8f969d);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.75), inset 0 -1px 2px rgba(0,0,0,.35), 0 1px 2px rgba(0,0,0,.6);
 }
-.hero-summary{max-width:560px; color:var(--dim); font-size:.98rem; line-height:1.7; margin:1.2rem 0 0;}
-.contact-rows{display:flex; flex-direction:column; gap:.5rem; margin:1.5rem 0 1.2rem;}
-.crow{display:flex; align-items:center; gap:.7rem; color:var(--dim); font-size:.86rem; font-family:var(--font-mono);}
-a.crow:hover{color:#fff;}
-.crow-ic{
-  width:27px; height:27px; flex-shrink:0; display:grid; place-items:center;
-  border:1px solid var(--border); border-radius:8px; color:var(--slate-lt); font-size:.8rem;
+.chip::before{content:""; position:absolute; inset:5px; border:1px solid rgba(28,32,37,.42); border-radius:3px;}
+.chip::after{
+  content:""; position:absolute; left:5px; right:5px; top:50%; height:1px; transform:translateY(-.5px);
+  background:rgba(28,32,37,.4); box-shadow:0 -6px 0 rgba(28,32,37,.28), 0 6px 0 rgba(28,32,37,.28);
 }
-.socials{display:flex; flex-wrap:wrap; gap:.5rem;}
-.social{
-  display:inline-flex; align-items:center; gap:.45em;
-  font-family:var(--font-mono); font-size:.75rem; color:var(--dim);
-  background:var(--surface-2); border:1px solid var(--border); border-radius:9px;
-  padding:.45em .72em; transition:transform .2s ease,color .2s ease,border-color .2s ease,background .2s ease;
+
+.mname{
+  font-family:var(--font-display); font-weight:700; line-height:1; letter-spacing:-.01em;
+  font-size:clamp(2.1rem,5.6vw,3.1rem); margin:1.4rem 0 0;
+  background:linear-gradient(180deg,#fbfcfd 0%,#c6cdd3 55%,#9aa1a9 100%);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 1px 0 rgba(0,0,0,.55)) drop-shadow(0 -1px 0 rgba(255,255,255,.06));
 }
-.social:hover{color:#fff; border-color:var(--slate-lt); background:#2c343b; transform:translateY(-2px);}
-.vcard-qr{display:flex; flex-direction:column; align-items:center; gap:.7rem;}
-.qr-tile{background:#fff; border-radius:14px; padding:11px; box-shadow:0 12px 30px -14px rgba(0,0,0,.75);}
-.qr-tile img{display:block; width:126px; height:126px; image-rendering:pixelated;}
-.qr-cap{font-family:var(--font-mono); font-size:.62rem; letter-spacing:.22em; color:var(--faint); text-align:center; line-height:1.6;}
-.vcard-actions{display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.7rem; padding-top:1.5rem; border-top:1px solid var(--border);}
-.btn{
-  display:inline-flex; align-items:center; gap:.5em;
-  font-family:var(--font-mono); font-size:.78rem; font-weight:500; letter-spacing:.02em;
-  color:var(--text); background:var(--surface-2); border:1px solid var(--border);
-  border-radius:11px; padding:.72em 1.05em; cursor:pointer;
-  transition:transform .2s ease,color .2s ease,border-color .2s ease,background .2s ease,box-shadow .2s ease;
+.mrole{
+  font-family:var(--font-mono); font-size:.8rem; letter-spacing:.24em; text-transform:uppercase;
+  color:#8b929a; margin-top:.6rem; text-shadow:0 1px 0 rgba(255,255,255,.05);
 }
-.btn:hover{color:#fff; border-color:var(--slate-lt); background:#2c343b; transform:translateY(-2px); box-shadow:0 12px 28px -16px rgba(0,0,0,.9);}
-.btn-primary{background:linear-gradient(180deg,#f3f6f8,#dde3e8); color:#15181c; border-color:#f3f6f8; font-weight:600;}
-.btn-primary:hover{background:#fff; color:#000;}
+.groove{
+  height:2px; margin:1.35rem 0; border-radius:2px;
+  background:linear-gradient(90deg, transparent, rgba(0,0,0,.6) 12%, rgba(0,0,0,.6) 88%, transparent);
+  box-shadow:0 1px 0 rgba(255,255,255,.06);
+}
+.mbody{display:grid; grid-template-columns:1fr auto; gap:1.7rem; align-items:center;}
+.mrow{
+  display:flex; align-items:center; gap:.75rem; padding:.3rem 0;
+  font-family:var(--font-mono); font-size:.86rem; color:#aab0b7; text-shadow:0 1px 0 rgba(255,255,255,.04);
+}
+a.mrow:hover{color:#eef1f4;}
+.mi{width:16px; height:16px; flex:none; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; opacity:.8;}
+.studs{display:flex; gap:.6rem; margin-top:1rem; flex-wrap:wrap;}
+.stud{
+  width:39px; height:39px; border-radius:50%; display:grid; place-items:center; font-size:.98rem; text-decoration:none;
+  background:linear-gradient(145deg,#2c3036,#191c20);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.15), inset 0 -2px 3px rgba(0,0,0,.6), 0 2px 3px rgba(0,0,0,.5);
+  transition:transform .16s ease, box-shadow .16s ease;
+}
+.stud:hover{transform:translateY(-2px); box-shadow:inset 0 1px 0 rgba(255,255,255,.22), 0 7px 13px -4px rgba(0,0,0,.75);}
+.stud:active{transform:translateY(0); box-shadow:inset 0 2px 5px rgba(0,0,0,.7);}
+.mqr{display:flex; flex-direction:column; align-items:center; gap:.55rem;}
+.qrplate{
+  padding:11px; border-radius:12px;
+  background:linear-gradient(145deg,#f2f3f5,#d6d9dd);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85), inset 0 -2px 4px rgba(0,0,0,.18), 0 2px 5px rgba(0,0,0,.55);
+}
+.qrplate img{display:block; width:116px; height:116px; image-rendering:pixelated;}
+.qrcap{font-family:var(--font-mono); font-size:.6rem; letter-spacing:.24em; color:#8b929a; text-align:center;}
+.mactions{display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.5rem;}
+.mkey{
+  display:inline-flex; align-items:center; gap:.5em; cursor:pointer;
+  font-family:var(--font-mono); font-size:.78rem; letter-spacing:.02em; text-decoration:none;
+  padding:.75em 1.15em; border-radius:11px; color:#cfd4da;
+  background:linear-gradient(145deg,#2c3037,#191c20);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14), inset 0 -2px 3px rgba(0,0,0,.6), 0 2px 4px rgba(0,0,0,.5);
+  transition:transform .14s ease, box-shadow .14s ease, color .14s ease;
+}
+.mkey:hover{color:#fff; transform:translateY(-1px);}
+.mkey:active{transform:translateY(1px); box-shadow:inset 0 2px 5px rgba(0,0,0,.7);}
+.mkey--primary{
+  color:#1a1d21; font-weight:600;
+  background:linear-gradient(145deg,#f5f7f9,#cfd4da 55%,#adb3ba);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9), inset 0 -2px 3px rgba(0,0,0,.22), 0 3px 6px rgba(0,0,0,.5);
+}
+.mkey--primary:hover{color:#000;}
+.mcaption{max-width:620px; margin:1.5rem auto .2rem; color:var(--dim); font-size:.96rem; line-height:1.7; text-align:center;}
 
 /* ---------- section divider between card and resume ---------- */
 .rdiv{display:flex; align-items:center; gap:1.2rem; margin:3.4rem 0 .6rem;}
@@ -178,8 +244,8 @@ a.crow:hover{color:#fff;}
 .skill-ic{font-size:1.05rem;}
 .skill-title{font-family:var(--font-display); font-weight:600; color:#fff; font-size:1.02rem;}
 .chips{display:flex; flex-wrap:wrap; gap:.5rem;}
-.chip{font-family:var(--font-mono); font-size:.75rem; color:var(--dim); background:var(--surface-2); border:1px solid var(--border); border-radius:8px; padding:.42em .7em; transition:color .2s ease,border-color .2s ease,background .2s ease;}
-.chip:hover{color:#fff; border-color:var(--slate-lt); background:#2c343b;}
+.chip-tag{font-family:var(--font-mono); font-size:.75rem; color:var(--dim); background:var(--surface-2); border:1px solid var(--border); border-radius:8px; padding:.42em .7em; transition:color .2s ease,border-color .2s ease,background .2s ease;}
+.chip-tag:hover{color:#fff; border-color:var(--slate-lt); background:#2c343b;}
 
 /* ---------- recommendations ---------- */
 .rec .qm{font-family:var(--font-display); font-size:2.4rem; color:#3a434b; line-height:.5; display:block; margin-bottom:.5rem;}
@@ -210,67 +276,69 @@ a.crow:hover{color:#fff;}
 [data-testid="stChatInput"] textarea{color:var(--text)!important;}
 [data-testid="stChatInput"] textarea::placeholder{color:var(--faint)!important;}
 
-/* links inside custom HTML must follow the monochrome system, not Streamlit's
-   default blue markdown link colour */
-[data-testid="stMarkdownContainer"] .social,
-[data-testid="stMarkdownContainer"] .btn,
-[data-testid="stMarkdownContainer"] .crow,
+/* links inside custom HTML must follow the theme, not Streamlit's blue */
+[data-testid="stMarkdownContainer"] .mrow,
+[data-testid="stMarkdownContainer"] .stud,
+[data-testid="stMarkdownContainer"] .mkey,
 [data-testid="stMarkdownContainer"] .proj,
 [data-testid="stMarkdownContainer"] .proj-name{text-decoration:none!important;}
-.social{color:var(--dim)!important;}
-.social:hover{color:#fff!important;}
-.crow{color:var(--dim)!important;}
-a.crow:hover{color:#fff!important;}
-.btn{color:var(--text)!important;}
-.btn-primary{color:#15181c!important;}
+.mrow{color:#aab0b7!important;}
+a.mrow:hover{color:#eef1f4!important;}
+.mkey{color:#cfd4da!important;}
+.mkey--primary{color:#1a1d21!important;}
 .proj-name{color:var(--text)!important;}
 .proj:hover .proj-name{color:#fff!important;}
 .proj-arrow{color:var(--slate-lt)!important;}
 
 @media(max-width:680px){
-  .vcard-main{grid-template-columns:1fr;}
-  .vcard-qr{flex-direction:row; align-items:center; justify-self:start;}
+  .mbody{grid-template-columns:1fr;}
+  .mqr{justify-self:start; flex-direction:row; align-items:center; gap:1rem;}
+  .mcard{padding:1.6rem 1.4rem;}
   .proj-grid{grid-template-columns:1fr;}
 }
 
 @keyframes fadeUp{from{opacity:0; transform:translateY(14px);}to{opacity:1; transform:none;}}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(207,214,220,.5);}70%{box-shadow:0 0 0 9px rgba(207,214,220,0);}100%{box-shadow:0 0 0 0 rgba(207,214,220,0);}}
 </style>
 """
 
 
 def contact_card_html(p, qr_datauri, resume_url, card_url, vcf_url):
     d = p["personal_data"]
-    socials = _join(
-        f'<a class="social" href="{escape(info["link"], quote=True)}" target="_blank" rel="noopener">'
-        f'{_e(info["icon"])} {_e(name)}</a>'
+    initials = "".join(w[0] for w in p["name"].split()[:2]).upper()
+    studs = _join(
+        f'<a class="stud" href="{escape(info["link"], quote=True)}" target="_blank" rel="noopener" '
+        f'title="{_e(name)}" aria-label="{_e(name)}">{_e(info["icon"])}</a>'
         for name, info in p["contact"].items()
     )
     return _join([
-        '<div class="vcard">',
-        '<div class="vcard-main">',
-        '<div class="vcard-id">',
-        '<div class="eyebrow"><span class="pulse"></span>DIGITAL CONTACT CARD</div>',
-        f'<h1 class="hero-name">{_e(p["name"])}</h1>',
-        f'<div class="hero-role">{_e(p["title"])}</div>',
-        f'<p class="hero-summary">{_e(p["summary"])}</p>',
-        '<div class="contact-rows">',
-        f'<a class="crow" href="mailto:{_e(d["email"])}"><span class="crow-ic">@</span><span>{_e(d["email"])}</span></a>',
-        f'<div class="crow"><span class="crow-ic">#</span><span>{_e(d["phone_number"])}</span></div>',
-        f'<div class="crow"><span class="crow-ic">&#9678;</span><span>{_e(d["current_location"])}</span></div>',
+        '<div class="mstage">',
+        '<div class="mcard">',
+        '<div class="mtop">',
+        f'<div class="seal"><span>{_e(initials)}</span></div>',
+        f'<div class="mtech">{_IC_NFC}<div class="chip"></div></div>',
         '</div>',
-        f'<div class="socials">{socials}</div>',
+        f'<div class="mname">{_e(p["name"])}</div>',
+        f'<div class="mrole">{_e(p["title"])}</div>',
+        '<div class="groove"></div>',
+        '<div class="mbody">',
+        '<div class="mdetails">',
+        f'<a class="mrow" href="mailto:{_e(d["email"])}">{_IC_MAIL}<span>{_e(d["email"])}</span></a>',
+        f'<div class="mrow">{_IC_PHONE}<span>{_e(d["phone_number"])}</span></div>',
+        f'<div class="mrow">{_IC_PIN}<span>{_e(d["current_location"])}</span></div>',
+        f'<div class="studs">{studs}</div>',
         '</div>',
-        '<div class="vcard-qr">',
-        f'<div class="qr-tile"><img src="{qr_datauri}" alt="Scan to save contact"></div>',
-        '<div class="qr-cap">SCAN&nbsp;TO&nbsp;SAVE<br>CONTACT</div>',
+        '<div class="mqr">',
+        f'<div class="qrplate"><img src="{qr_datauri}" alt="Scan to save contact"></div>',
+        '<div class="qrcap">SCAN&nbsp;TO&nbsp;SAVE</div>',
         '</div>',
         '</div>',
-        '<div class="vcard-actions">',
-        f'<a class="btn btn-primary" href="{escape(resume_url, quote=True)}">Download R&eacute;sum&eacute; <span>&#8595;</span></a>',
-        f'<a class="btn" href="{escape(card_url, quote=True)}" target="_blank">Print Contact Card</a>',
-        f'<a class="btn" href="{escape(vcf_url, quote=True)}">Save Contact (.vcf)</a>',
+        '<div class="mactions">',
+        f'<a class="mkey mkey--primary" href="{escape(resume_url, quote=True)}">Download R&eacute;sum&eacute; <span>&#8595;</span></a>',
+        f'<a class="mkey" href="{escape(card_url, quote=True)}" target="_blank">Print Card</a>',
+        f'<a class="mkey" href="{escape(vcf_url, quote=True)}">Save .vcf</a>',
         '</div>',
+        '</div>',
+        f'<p class="mcaption">{_e(p["summary"])}</p>',
         '</div>',
     ])
 
@@ -344,7 +412,7 @@ def projects_html(p):
 def skills_html(p):
     cards = []
     for cat in p["skill"]:
-        chips = _join(f'<span class="chip">{_e(s)}</span>' for s in cat["list"])
+        chips = _join(f'<span class="chip-tag">{_e(s)}</span>' for s in cat["list"])
         cards.append(_join([
             '<div class="card">',
             f'<div class="skill-head"><span class="skill-ic">{_e(cat["icon"])}</span>'
