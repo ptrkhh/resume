@@ -86,7 +86,7 @@ a:hover{color:var(--white);}
 .mstage{padding:.4rem 0 .2rem;}
 .mcard{
   position:relative; overflow:hidden; border-radius:22px;
-  padding:2rem 2.1rem 1.7rem;
+  padding:1.8rem 2.1rem 1.7rem;
   transform:rotate(-.5deg);
   transition:transform .55s cubic-bezier(.2,.8,.2,1), box-shadow .55s ease;
   animation:fadeUp .7s ease both;
@@ -120,7 +120,7 @@ a:hover{color:var(--white);}
 .mcard:hover::after{left:120%;}
 .mcard>*{position:relative; z-index:1;}
 
-.mtech{display:flex; justify-content:flex-end; align-items:center; gap:.85rem;}
+.mtech{position:absolute; top:1.6rem; right:2.1rem; z-index:2; display:flex; align-items:center; gap:.8rem;}
 .nfc{width:22px; height:22px; fill:none; stroke:#9aa1a8; stroke-width:1.7; stroke-linecap:round; opacity:.85;}
 .chip{
   width:40px; height:31px; border-radius:6px; position:relative; flex:none;
@@ -135,7 +135,7 @@ a:hover{color:var(--white);}
 
 .mname{
   font-family:var(--font-display); font-weight:700; line-height:1; letter-spacing:-.01em;
-  font-size:clamp(2.1rem,5.6vw,3.1rem); margin:1rem 0 0;
+  font-size:clamp(2.1rem,5.6vw,3.1rem); margin:0;
   background:linear-gradient(180deg,#fbfcfd 0%,#c6cdd3 55%,#9aa1a9 100%);
   -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
   filter:drop-shadow(0 1px 0 rgba(0,0,0,.55)) drop-shadow(0 -1px 0 rgba(255,255,255,.06));
@@ -156,15 +156,15 @@ a:hover{color:var(--white);}
 }
 a.mrow:hover{color:#eef1f4;}
 .mi{width:16px; height:16px; flex:none; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; opacity:.8;}
-.studs{display:flex; gap:.6rem; margin-top:1rem; flex-wrap:wrap;}
+.studs{display:flex; gap:.5rem; margin-top:1rem; flex-wrap:wrap;}
 .stud{ /* recessed metal well with a laser-etched brand mark */
-  width:40px; height:40px; border-radius:50%; display:grid; place-items:center; text-decoration:none;
+  width:34px; height:34px; border-radius:50%; display:grid; place-items:center; text-decoration:none;
   background:radial-gradient(120% 120% at 50% 22%, #23272c, #15181c);
   box-shadow:inset 0 2px 4px rgba(0,0,0,.72), inset 0 -1px 0 rgba(255,255,255,.07), 0 1px 0 rgba(255,255,255,.03);
   transition:box-shadow .16s ease;
 }
 .stud:hover{box-shadow:inset 0 2px 4px rgba(0,0,0,.6), inset 0 -1px 0 rgba(255,255,255,.09), 0 0 0 1px rgba(255,255,255,.06);}
-.sicon{width:19px; height:19px; fill:#a7aeb5; filter:drop-shadow(0 1px 0 rgba(0,0,0,.55)); transition:fill .16s ease;}
+.sicon{width:16px; height:16px; fill:#a7aeb5; filter:drop-shadow(0 1px 0 rgba(0,0,0,.55)); transition:fill .16s ease;}
 .stud:hover .sicon{fill:#eef1f4;}
 .mqr{display:flex; flex-direction:column; align-items:center; gap:.55rem;}
 .qrlink{display:inline-block; text-decoration:none; border-radius:12px; transition:transform .18s ease;}
@@ -308,7 +308,8 @@ a.mrow:hover{color:#eef1f4!important;}
 @media(max-width:680px){
   .mbody{grid-template-columns:1fr;}
   .mqr{justify-self:start; flex-direction:row; align-items:center; gap:1rem;}
-  .mcard{padding:1.6rem 1.4rem;}
+  .mcard{padding:1.5rem 1.4rem;}
+  .mtech{top:1.35rem; right:1.4rem;}
   .mactions{flex-direction:column;}
   .mkey{width:100%; justify-content:center;}
   .proj-grid{grid-template-columns:1fr;}
