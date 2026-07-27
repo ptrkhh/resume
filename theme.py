@@ -120,19 +120,7 @@ a:hover{color:var(--white);}
 .mcard:hover::after{left:120%;}
 .mcard>*{position:relative; z-index:1;}
 
-.mtop{display:flex; justify-content:space-between; align-items:flex-start;}
-.seal{
-  width:54px; height:54px; border-radius:50%; display:grid; place-items:center;
-  font-family:var(--font-display); font-weight:700; font-size:1.15rem; letter-spacing:.02em;
-  background:linear-gradient(145deg,#30353b,#171a1e);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.2), inset 0 -2px 5px rgba(0,0,0,.75), 0 1px 2px rgba(0,0,0,.6);
-}
-.seal span{
-  background:linear-gradient(135deg,#f6f8fa,#aeb6bf 50%,#6f767e);
-  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 1px 0 rgba(0,0,0,.5));
-}
-.mtech{display:flex; align-items:center; gap:.85rem; padding-top:.3rem;}
+.mtech{display:flex; justify-content:flex-end; align-items:center; gap:.85rem;}
 .nfc{width:22px; height:22px; fill:none; stroke:#9aa1a8; stroke-width:1.7; stroke-linecap:round; opacity:.85;}
 .chip{
   width:40px; height:31px; border-radius:6px; position:relative; flex:none;
@@ -147,7 +135,7 @@ a:hover{color:var(--white);}
 
 .mname{
   font-family:var(--font-display); font-weight:700; line-height:1; letter-spacing:-.01em;
-  font-size:clamp(2.1rem,5.6vw,3.1rem); margin:1.4rem 0 0;
+  font-size:clamp(2.1rem,5.6vw,3.1rem); margin:1rem 0 0;
   background:linear-gradient(180deg,#fbfcfd 0%,#c6cdd3 55%,#9aa1a9 100%);
   -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
   filter:drop-shadow(0 1px 0 rgba(0,0,0,.55)) drop-shadow(0 -1px 0 rgba(255,255,255,.06));
@@ -179,11 +167,15 @@ a.mrow:hover{color:#eef1f4;}
 .sicon{width:19px; height:19px; fill:#a7aeb5; filter:drop-shadow(0 1px 0 rgba(0,0,0,.55)); transition:fill .16s ease;}
 .stud:hover .sicon{fill:#eef1f4;}
 .mqr{display:flex; flex-direction:column; align-items:center; gap:.55rem;}
+.qrlink{display:inline-block; text-decoration:none; border-radius:12px; transition:transform .18s ease;}
+.qrlink:hover{transform:translateY(-2px);}
 .qrplate{
-  padding:11px; border-radius:12px;
+  display:inline-block; padding:11px; border-radius:12px;
   background:linear-gradient(145deg,#f2f3f5,#d6d9dd);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.85), inset 0 -2px 4px rgba(0,0,0,.18), 0 2px 5px rgba(0,0,0,.55);
+  transition:box-shadow .18s ease;
 }
+.qrlink:hover .qrplate{box-shadow:inset 0 1px 0 rgba(255,255,255,.9), 0 9px 20px -6px rgba(0,0,0,.72);}
 .qrplate img{display:block; width:116px; height:116px; image-rendering:pixelated;}
 .qrcap{font-family:var(--font-mono); font-size:.6rem; letter-spacing:.24em; color:#8b929a; text-align:center;}
 .mactions{display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.5rem;}
@@ -203,7 +195,7 @@ a.mrow:hover{color:#eef1f4;}
   box-shadow:inset 0 1px 0 rgba(255,255,255,.9), inset 0 -2px 3px rgba(0,0,0,.22), 0 3px 6px rgba(0,0,0,.5);
 }
 .mkey--primary:hover{color:#000;}
-.mcaption{max-width:620px; margin:1.5rem auto .2rem; color:var(--dim); font-size:.96rem; line-height:1.7; text-align:center;}
+.mcaption{width:min(640px,100%); margin:2.7rem auto 0; color:var(--dim); font-size:.96rem; line-height:1.75; text-align:center;}
 
 /* ---------- section divider between card and resume ---------- */
 .rdiv{display:flex; align-items:center; gap:1.2rem; margin:3.4rem 0 .6rem;}
@@ -300,6 +292,7 @@ a.mrow:hover{color:#eef1f4;}
 [data-testid="stMarkdownContainer"] .mrow,
 [data-testid="stMarkdownContainer"] .stud,
 [data-testid="stMarkdownContainer"] .mkey,
+[data-testid="stMarkdownContainer"] .qrlink,
 [data-testid="stMarkdownContainer"] .proj,
 [data-testid="stMarkdownContainer"] .proj-name{text-decoration:none!important;}
 .mrow{color:#aab0b7!important;}
@@ -309,11 +302,15 @@ a.mrow:hover{color:#eef1f4!important;}
 .proj-name{color:var(--text)!important;}
 .proj:hover .proj-name{color:#fff!important;}
 .proj-arrow{color:var(--slate-lt)!important;}
+/* Streamlit styles markdown block elements; force our centering to win */
+[data-testid="stMarkdownContainer"] .mcaption{margin:2.7rem auto 0!important;}
 
 @media(max-width:680px){
   .mbody{grid-template-columns:1fr;}
   .mqr{justify-self:start; flex-direction:row; align-items:center; gap:1rem;}
   .mcard{padding:1.6rem 1.4rem;}
+  .mactions{flex-direction:column;}
+  .mkey{width:100%; justify-content:center;}
   .proj-grid{grid-template-columns:1fr;}
 }
 
@@ -324,7 +321,6 @@ a.mrow:hover{color:#eef1f4!important;}
 
 def contact_card_html(p, qr_datauri, resume_url, card_url, vcf_url):
     d = p["personal_data"]
-    initials = "".join(w[0] for w in p["name"].split()[:2]).upper()
     studs = _join(
         f'<a class="stud" href="{escape(info["link"], quote=True)}" target="_blank" rel="noopener" '
         f'title="{_e(name)}" aria-label="{_e(name)}">{_social_icon(name)}</a>'
@@ -333,10 +329,7 @@ def contact_card_html(p, qr_datauri, resume_url, card_url, vcf_url):
     return _join([
         '<div class="mstage">',
         '<div class="mcard">',
-        '<div class="mtop">',
-        f'<div class="seal"><span>{_e(initials)}</span></div>',
         f'<div class="mtech">{_IC_NFC}<div class="chip"></div></div>',
-        '</div>',
         f'<div class="mname">{_e(p["name"])}</div>',
         f'<div class="mrole">{_e(p["title"])}</div>',
         '<div class="groove"></div>',
@@ -348,17 +341,17 @@ def contact_card_html(p, qr_datauri, resume_url, card_url, vcf_url):
         f'<div class="studs">{studs}</div>',
         '</div>',
         '<div class="mqr">',
-        f'<div class="qrplate"><img src="{qr_datauri}" alt="Scan to save contact"></div>',
-        '<div class="qrcap">SCAN&nbsp;TO&nbsp;SAVE</div>',
+        f'<a class="qrlink" href="{escape(vcf_url, quote=True)}" title="Tap to save contact">'
+        f'<span class="qrplate"><img src="{qr_datauri}" alt="Save contact"></span></a>',
+        '<div class="qrcap">TAP&nbsp;OR&nbsp;SCAN<br>TO&nbsp;SAVE</div>',
         '</div>',
         '</div>',
         '<div class="mactions">',
         f'<a class="mkey mkey--primary" href="{escape(resume_url, quote=True)}">Download R&eacute;sum&eacute; <span>&#8595;</span></a>',
         f'<a class="mkey" href="{escape(card_url, quote=True)}" target="_blank">Print Card</a>',
-        f'<a class="mkey" href="{escape(vcf_url, quote=True)}">Save .vcf</a>',
         '</div>',
         '</div>',
-        f'<p class="mcaption">{_e(p["summary"])}</p>',
+        f'<div class="mcaption">{_e(p["summary"])}</div>',
         '</div>',
     ])
 
