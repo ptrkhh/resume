@@ -43,22 +43,19 @@ def vcard_content():
         data = yaml.safe_load(f)
 
     first, _, last = data['name'].partition(" ")
-    # Escape text values per RFC 2426: backslash, comma, semicolon, newline.
-    # Without this, the comma in the summary truncates NOTE in strict readers.
+    # Escape text values per RFC 2426 (backslash, comma, semicolon, newline).
+    # Kept intentionally lean (no NOTE/summary, GEO, ...) so the QR stays low
+    # density and easy to scan; every field here is useful in a saved contact.
     esc = lambda s: s.replace("\\", "\\\\").replace(",", "\\,").replace(";", "\\;").replace("\n", "\\n")
-    company = data['experience'][0]['company']  # current employer -> ORG
+    d = data['personal_data']
     return f"""BEGIN:VCARD
 VERSION:3.0
 N:{last};{first};;;
 FN:{esc(data['name'])}
-GENDER:M
-EMAIL:{data['personal_data']['email']}
-TEL:{data['personal_data']['phone_number'].replace("-", "")}
+EMAIL:{d['email']}
+TEL:{d['phone_number'].replace("-", "")}
 ADR;TYPE=home:;;;Jakarta;Jakarta;;Indonesia
-GEO:-6.21462;106.84513
-ORG:{esc(company)}
-ROLE:{esc(data['title'])}
+ORG:{esc(data['experience'][0]['company'])}
 TITLE:{esc(data['title'])}
-NOTE:{esc(data['summary'])}
 URL:https://contactpatrick.streamlit.app
 END:VCARD"""

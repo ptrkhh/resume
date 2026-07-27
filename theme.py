@@ -169,8 +169,7 @@ a.mrow:hover{color:#23282d;}
 .mqr{display:flex; flex-direction:column; align-items:center; gap:.7rem;}
 .qrlink{display:inline-block; text-decoration:none; transition:transform .18s ease;}
 .qrlink:hover{transform:translateY(-2px);}
-.qrplate{display:inline-block;}
-.qrplate img{display:block; width:150px; height:150px; image-rendering:pixelated;}
+.qrimg{display:block; width:190px; height:190px; image-rendering:pixelated;}
 .qrcap{font-family:var(--font-mono); font-size:.6rem; letter-spacing:.24em; color:#5c636b; text-align:center;}
 .mactions{display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.5rem;}
 .mkey{
@@ -302,7 +301,6 @@ a.mrow:hover{color:#23282d!important;}
 
 @media(max-width:680px){
   .mbody{grid-template-columns:1fr;}
-  .mqr{justify-self:start; flex-direction:row; align-items:center; gap:1rem;}
   .mcard{padding:1.5rem 1.4rem;}
   .mtech{top:1.35rem; right:1.4rem;}
   .mactions{flex-direction:column;}
@@ -338,7 +336,7 @@ def contact_card_html(p, qr_datauri, resume_url, card_url, vcf_url):
         '</div>',
         '<div class="mqr">',
         f'<a class="qrlink" href="{escape(vcf_url, quote=True)}" title="Tap to save contact">'
-        f'<span class="qrplate"><img src="{qr_datauri}" alt="Save contact"></span></a>',
+        f'<img class="qrimg" src="{qr_datauri}" alt="Save contact"></a>',
         '<div class="qrcap">TAP&nbsp;OR&nbsp;SCAN<br>TO&nbsp;SAVE</div>',
         '</div>',
         '</div>',
