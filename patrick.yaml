@@ -24,9 +24,9 @@ experience:
     year_to: present
     description: Lead an AI R&D team delivering $500K+ in enterprise AI projects
     description_details:
-      - "Built a real-time speech-to-speech avatar: live LLM + RAG pipeline with lip-synced talking-head video streaming (Gemini, LangChain, MuseTalk, LoRA fine-tuning via Unsloth)"
+      - "Build and ship a real-time speech-to-speech avatar: live LLM + RAG pipeline with lip-synced talking-head video streaming (Gemini, LangChain, MuseTalk, LoRA fine-tuning via Unsloth)"
       - "Manage an 8-person AI team across 3 time zones, owning architecture, delivery, and client relationships"
-      - "Designed the routing layer serving 3,500+ retail stores worldwide"
+      - "Design and own the routing layer serving 3,500+ retail stores worldwide"
       - "Deploy and operate AI services on GCP with Docker and Kubernetes"
 
   - company: Redigan
@@ -38,7 +38,7 @@ experience:
     description_details:
       - "Built the backend in Java/Spring Boot and Go/Gin with PostgreSQL, Redis, and OpenSearch full-text search"
       - "Integrated payment, logistics, and OCR vendors (BCA Bank, Shipper, AWS Textract)"
-      - "Added a ChatGPT-powered product recommendation system"
+      - "Shipped a ChatGPT-powered product recommendation system"
       - "Halved infrastructure costs by consolidating AWS services (S3, EC2, RDS, OpenSearch) with zero downtime"
       - "Ran CI/CD and code-quality gates on GitHub Actions"
 
@@ -50,7 +50,7 @@ experience:
     description: Built production NLP services for Indonesia's leading conversational-AI platform
     description_details:
       - "Built end-to-end ML services in Python/Flask; evaluated and tuned models across python-crfsuite, scikit-learn, TensorFlow, and PyTorch"
-      - "Built the Java IM gateway fronting the whole platform, connecting Telegram and other messaging apps via Kafka and S3"
+      - "Developed the Java IM gateway fronting the whole platform, connecting Telegram and other messaging apps via Kafka and S3"
       - "Ran RabbitMQ + Apache Avro messaging for high-throughput data processing"
       - "Deployed with Docker and Kubernetes on GCP; maintained Go and Node.js microservices"
 
@@ -63,7 +63,7 @@ experience:
     description_details:
       - "Built the Flask ML API serving the platform's daily predictions"
       - "Improved model performance with LightGBM and SHAP explainability"
-      - "Added Ray.io distributed computing and Honeycomb.io observability"
+      - "Introduced Ray.io distributed computing and Honeycomb.io observability"
       - "Published the platform's Python client on PyPI"
 
   - company: MIA3 GmbH
