@@ -9,16 +9,16 @@ RESUME_CSS = """
 @page { size: letter; margin: 1.1cm 1.5cm; }
 * { margin: 0; padding: 0; }
 body { font-family: Helvetica, Arial, sans-serif; font-size: 9pt; color: #222; line-height: 1.3; }
-h1 { font-size: 20pt; letter-spacing: 0.5pt; }
-.subtitle { font-size: 11pt; color: #1a3c6e; margin-top: 1pt; }
+h1 { font-size: 20pt; letter-spacing: 0.5pt; color: #23292f; }
+.subtitle { font-size: 11pt; color: #36454f; margin-top: 1pt; }
 .contact { font-size: 8.5pt; color: #444; margin-top: 4pt; }
-.contact a { color: #1a3c6e; text-decoration: none; }
-h2 { font-size: 10.5pt; color: #1a3c6e; text-transform: uppercase; letter-spacing: 1pt;
-     border-bottom: 1pt solid #1a3c6e; margin: 8pt 0 4pt; padding-bottom: 1pt; }
+.contact a { color: #36454f; text-decoration: none; }
+h2 { font-size: 10.5pt; color: #36454f; text-transform: uppercase; letter-spacing: 1pt;
+     border-bottom: 1pt solid #708090; margin: 8pt 0 4pt; padding-bottom: 1pt; }
 .role { margin-bottom: 5pt; }
 .role-head { display: flex; justify-content: space-between; }
 .role-head b { font-size: 10pt; }
-.dates { color: #666; font-size: 8.5pt; }
+.dates { color: #708090; font-size: 8.5pt; }
 .org { color: #444; font-style: italic; font-size: 9pt; }
 ul { margin: 2pt 0 0 12pt; }
 li { margin-bottom: 1pt; }
@@ -74,10 +74,10 @@ CARD_CSS = """
 @page { size: 4in 2.5in; margin: 0.18in; }
 * { margin: 0; padding: 0; }
 body { font-family: Helvetica, Arial, sans-serif; color: #333; }
-h1 { font-size: 15pt; color: #1a3c6e; text-align: center; letter-spacing: 1pt; }
-.subtitle { font-size: 9.5pt; color: #4a6fa5; text-align: center; margin-bottom: 6pt; }
+h1 { font-size: 15pt; color: #36454f; text-align: center; letter-spacing: 1pt; }
+.subtitle { font-size: 9.5pt; color: #708090; text-align: center; margin-bottom: 6pt; }
 table { width: 100%; border-collapse: collapse; }
-td.label { font-weight: bold; color: #1a3c6e; font-size: 8pt; padding: 1pt 6pt 1pt 0; white-space: nowrap; }
+td.label { font-weight: bold; color: #36454f; font-size: 8pt; padding: 1pt 6pt 1pt 0; white-space: nowrap; }
 td.value { font-size: 8pt; }
 img.qr { width: 0.85in; height: 0.85in; }
 """

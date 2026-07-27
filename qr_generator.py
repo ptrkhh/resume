@@ -1,7 +1,20 @@
+import base64
 import io
 
 import qrcode
 import yaml
+
+
+def vcard_qr_datauri(fill="#0d1013", back="#ffffff"):
+    """QR of the vCard as a base64 data URI, for embedding directly in HTML."""
+    qr = qrcode.QRCode(version=1, box_size=10, border=4)
+    qr.add_data(vcard_content())
+    qr.make(fit=True)
+
+    img = qr.make_image(fill_color=fill, back_color=back)
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    return "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()
 
 
 def generate_vcard_qr():

@@ -3,9 +3,10 @@ from pathlib import Path
 import streamlit as st
 import yaml
 
+import theme
 from llm import initialize_llm, ask_bot
 from pdf_generator import generate_resume_pdf, generate_contact_card_pdf
-from qr_generator import generate_vcard_qr, vcard_content
+from qr_generator import vcard_content, vcard_qr_datauri
 
 # Load resume data and initialize chatbot
 if "convo" not in st.session_state:
@@ -24,70 +25,46 @@ if "convo" not in st.session_state:
     (static / f"{base}_Contact_Card.pdf").write_bytes(generate_contact_card_pdf(p).getvalue())
     (static / f"{base}_Contact.vcf").write_text(vcard_content())
 
+    # QR of the vCard, embedded straight into the contact card (scan to save).
+    st.session_state.qr_datauri = vcard_qr_datauri()
+
+p = st.session_state.patrick
+base = p["name"].replace(" ", "_")
+
 # Page configuration
-PAGE_TITLE = "Resume | " + st.session_state.patrick["name"]
 st.set_page_config(
-    page_title=PAGE_TITLE,
+    page_title="Resume | " + p["name"],
     page_icon="👨💼",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="collapsed",
 )
 
-# Center content with plain CSS instead of measuring the window via JS
-# (streamlit_js_eval returned None on first render and forced a rerun).
+# Global theme (Modern Minimalist, monochrome, editorial)
+st.markdown(theme.THEME_CSS, unsafe_allow_html=True)
+
+# ------------------------------------------------------------------ contact card
 st.markdown(
-    "<style>.block-container{max-width:900px;margin:auto}</style>",
+    theme.contact_card_html(
+        p,
+        st.session_state.qr_datauri,
+        resume_url=f"app/static/{base}_Resume.pdf",
+        card_url=f"app/static/{base}_Contact_Card.pdf",
+        vcf_url=f"app/static/{base}_Contact.vcf",
+    ),
     unsafe_allow_html=True,
 )
 
-with st.container(border=True):
-    col1, col2 = st.columns([2, 1])
+# ---------------------------------------------------------------------- résumé
+st.markdown(theme.resume_divider("FULL RÉSUMÉ"), unsafe_allow_html=True)
 
-    with col1:
-        st.title(f"{st.session_state.patrick['name']}")
-        st.subheader(st.session_state.patrick['title'])
-        st.write(st.session_state.patrick["summary"])
-        st.write(f"📍 {st.session_state.patrick['personal_data']['current_location']}")
-        st.write(f"📧 {st.session_state.patrick['personal_data']['email']}")
-        st.write(f"📱 {st.session_state.patrick['personal_data']['phone_number']}")
-
-    with col2:
-        for platform, info in st.session_state.patrick["contact"].items():
-            st.link_button(f'{info["icon"]} {platform}', info["link"], use_container_width=True)
-
-        st.link_button(
-            "📄 Download Resume",
-            f"app/static/{st.session_state.patrick['name'].replace(' ', '_')}_Resume.pdf",
-            use_container_width=True,
-            type="primary",
-        )
-
-# Contact card action buttons
-col1, col2, col3 = st.columns(3)
-with col1:
-    st.link_button(
-        "🖨️ Print Contact Card",
-        f"app/static/{st.session_state.patrick['name'].replace(' ', '_')}_Contact_Card.pdf",
-        use_container_width=True,
-    )
-
-with col2:
-    if st.button("📱 Scan Contact Card", use_container_width=True):
-        qr_image = generate_vcard_qr()
-        st.image(qr_image, caption="Scan to save contact info", width=200)
-
-with col3:
-    st.link_button(
-        "💾 Download Contact",
-        f"app/static/{st.session_state.patrick['name'].replace(' ', '_')}_Contact.vcf",
-        use_container_width=True,
-    )
-
-st.divider()
-
-# Interactive chat section
-st.header(f"💬 Chat with {st.session_state.patrick['name']}'s AI Assistant")
-st.caption("*Ask me anything about my background, experience, or interests!*")
+# 01 — AI assistant
+st.markdown(
+    theme.section_header(
+        "01", f"Chat with {p['name'].split()[0]}",
+        note="Ask about my background, experience, or interests — answered live by Gemini.",
+    ),
+    unsafe_allow_html=True,
+)
 
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
@@ -105,62 +82,25 @@ if user_question := st.chat_input("Try asking about hobbies, experience, or skil
         st.write(response)
     st.session_state.chat_history += [("user", user_question), ("assistant", response)]
 
-# Professional Experience Section
-st.header("💼 Professional Experience")
+# 02 — Experience
+st.markdown(theme.section_header("02", "Experience"), unsafe_allow_html=True)
+st.markdown(theme.experience_html(p), unsafe_allow_html=True)
 
-for experience in st.session_state.patrick["experience"][:4]:
-    with st.container(border=True):
-        st.subheader(f"🏢 {experience['company']} - {experience['location']}")
-        st.write(f"**{experience['position']}**")
-        st.caption(f"{experience['year_from']} - {experience['year_to']}")
-        st.write(experience["description"])
+# 03 — Education
+st.markdown(theme.section_header("03", "Education"), unsafe_allow_html=True)
+st.markdown(theme.education_html(p), unsafe_allow_html=True)
 
-        if experience["description_details"]:
-            st.write("**Key Achievements:**")
-            for detail in experience["description_details"]:
-                st.markdown(f"• {detail}")
+# 04 — Projects
+st.markdown(theme.section_header("04", "Featured Projects"), unsafe_allow_html=True)
+st.markdown(theme.projects_html(p), unsafe_allow_html=True)
 
-# Education Section
-st.header("🎓 Education")
+# 05 — Skills
+st.markdown(theme.section_header("05", "Technical Skills"), unsafe_allow_html=True)
+st.markdown(theme.skills_html(p), unsafe_allow_html=True)
 
-for education in st.session_state.patrick["education"][:3]:
-    with st.container(border=True):
-        st.subheader(f"🏫 {education['institute']} - {education['location']}")
-        st.write(f"**{education['degree']}**")
-        st.caption(f"{education['year_from']} - {education['year_to']}")
-        st.write(education["description"])
+# 06 — Recommendations
+if p.get("recommendations"):
+    st.markdown(theme.section_header("06", "Recommendations"), unsafe_allow_html=True)
+    st.markdown(theme.recommendations_html(p), unsafe_allow_html=True)
 
-        if education["description_details"]:
-            st.write("**Highlights:**")
-            for detail in education["description_details"]:
-                st.markdown(f"• {detail}")
-
-# Projects Section
-st.header("🚀 Featured Projects")
-
-col1, col2 = st.columns(2)
-projects = list(st.session_state.patrick["project"].items())
-
-for idx, (project_name, project_link) in enumerate(projects):
-    col = col1 if idx % 2 == 0 else col2
-    with col:
-        with st.container(border=True):
-            st.write(f"🏆 [{project_name}]({project_link})")
-
-# Skills Section
-st.header("⚡ Technical Skills")
-
-for skill_category in st.session_state.patrick["skill"]:
-    with st.container(border=True):
-        st.subheader(f"{skill_category['icon']} {skill_category['title']}")
-        skills = ", ".join(skill_category["list"])
-        st.write(skills)
-
-# Recommendations Section
-if st.session_state.patrick.get("recommendations"):
-    st.header("🌟 Recommendations")
-    for rec in st.session_state.patrick["recommendations"][:4]:
-        with st.container(border=True):
-            st.markdown(f"> {rec['text']}")
-            who = rec["name"] + (f" · {rec['role']}" if rec.get("role") else "")
-            st.caption(f"— {who}")
+st.markdown(theme.footer_html(p), unsafe_allow_html=True)
