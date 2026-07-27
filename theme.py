@@ -166,17 +166,11 @@ a.mrow:hover{color:#23282d;}
 .stud:hover{box-shadow:inset 0 2px 5px rgba(0,0,0,.36), inset 0 -1px 0 rgba(255,255,255,.8), 0 0 0 1px rgba(0,0,0,.06);}
 .sicon{width:16px; height:16px; fill:#474e56; filter:drop-shadow(0 1px 0 rgba(255,255,255,.55)); transition:fill .16s ease;}
 .stud:hover .sicon{fill:#1d2226;}
-.mqr{display:flex; flex-direction:column; align-items:center; gap:.55rem;}
-.qrlink{display:inline-block; text-decoration:none; border-radius:12px; transition:transform .18s ease;}
+.mqr{display:flex; flex-direction:column; align-items:center; gap:.7rem;}
+.qrlink{display:inline-block; text-decoration:none; transition:transform .18s ease;}
 .qrlink:hover{transform:translateY(-2px);}
-.qrplate{
-  display:inline-block; padding:11px; border-radius:12px;
-  background:linear-gradient(145deg,#fdfdfe,#eceef1);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.9), inset 0 0 0 1px rgba(0,0,0,.05), 0 1px 3px rgba(0,0,0,.22);
-  transition:box-shadow .18s ease;
-}
-.qrlink:hover .qrplate{box-shadow:inset 0 1px 0 rgba(255,255,255,.95), inset 0 0 0 1px rgba(0,0,0,.06), 0 8px 16px -6px rgba(0,0,0,.4);}
-.qrplate img{display:block; width:116px; height:116px; image-rendering:pixelated;}
+.qrplate{display:inline-block;}
+.qrplate img{display:block; width:150px; height:150px; image-rendering:pixelated;}
 .qrcap{font-family:var(--font-mono); font-size:.6rem; letter-spacing:.24em; color:#5c636b; text-align:center;}
 .mactions{display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.5rem;}
 .mkey{
@@ -201,6 +195,7 @@ a.mrow:hover{color:#23282d;}
 .rdiv{display:flex; align-items:center; gap:1.2rem; margin:3.4rem 0 .6rem;}
 .rdiv::before,.rdiv::after{content:""; height:1px; flex:1; background:linear-gradient(90deg,transparent,var(--border),transparent);}
 .rdiv span{font-family:var(--font-mono); font-size:.68rem; letter-spacing:.34em; color:var(--faint); white-space:nowrap;}
+.rline{height:1px; margin:3.4rem 0 .6rem; background:linear-gradient(90deg,transparent,var(--border) 18%,var(--border) 82%,transparent);}
 
 /* ---------- resume section headers ---------- */
 .sec{display:flex; align-items:center; gap:1rem; margin:3rem 0 1.5rem;}
@@ -357,8 +352,10 @@ def contact_card_html(p, qr_datauri, resume_url, card_url, vcf_url):
     ])
 
 
-def resume_divider(label="FULL RÉSUMÉ"):
-    return f'<div class="rdiv"><span>{_e(label)}</span></div>'
+def resume_divider(label=None):
+    if label:
+        return f'<div class="rdiv"><span>{_e(label)}</span></div>'
+    return '<div class="rline"></div>'
 
 
 def section_header(num, title, note=None):

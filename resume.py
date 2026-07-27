@@ -26,7 +26,7 @@ if "convo" not in st.session_state:
     (static / f"{base}_Contact.vcf").write_text(vcard_content())
 
     # QR of the vCard, etched into the metal card's QR plate (scan to save).
-    st.session_state.qr_datauri = vcard_qr_datauri(fill="#111418", back="#f7f8f9")
+    st.session_state.qr_datauri = vcard_qr_datauri(fill="#5c636b", transparent=True)
 
 p = st.session_state.patrick
 base = p["name"].replace(" ", "_")
@@ -55,32 +55,27 @@ st.markdown(
 )
 
 # ---------------------------------------------------------------------- résumé
-st.markdown(theme.resume_divider("FULL RÉSUMÉ"), unsafe_allow_html=True)
+st.markdown(theme.resume_divider(), unsafe_allow_html=True)
 
 # 01 — AI assistant
-st.markdown(
-    theme.section_header(
-        "01", f"Chat with {p['name'].split()[0]}",
-        note="Ask about my background, experience, or interests — answered live by Gemini.",
-    ),
-    unsafe_allow_html=True,
-)
+st.markdown(theme.section_header("01", f"Chat with {p['name'].split()[0]}"), unsafe_allow_html=True)
 
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
+# Inline input (wrapped in a container so Streamlit renders it here instead of
+# pinning it to the bottom of the page).
+with st.container():
+    user_question = st.chat_input("Ask about my background, experience, or skills...")
+
+if user_question:
+    with st.spinner("Thinking..."):
+        response = ask_bot(user_question)
+    st.session_state.chat_history += [("user", user_question), ("assistant", response)]
+
 for role, text in st.session_state.chat_history:
     with st.chat_message(role):
         st.write(text)
-
-if user_question := st.chat_input("Try asking about hobbies, experience, or skills..."):
-    with st.chat_message("user"):
-        st.write(user_question)
-    with st.chat_message("assistant"):
-        with st.spinner("Thinking..."):
-            response = ask_bot(user_question)
-        st.write(response)
-    st.session_state.chat_history += [("user", user_question), ("assistant", response)]
 
 # 02 — Experience
 st.markdown(theme.section_header("02", "Experience"), unsafe_allow_html=True)
