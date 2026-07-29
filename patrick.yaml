@@ -49,9 +49,9 @@ experience:
     year_to: 10 / 2021
     description: Built production NLP services for Indonesia's leading conversational-AI platform
     description_details:
-      - "Built the end-to-end ML services in Python/Flask that every inbound chat message on the platform passed through, on a platform processing nearly 10M messages/day; evaluated and tuned models across python-crfsuite, scikit-learn, TensorFlow, and PyTorch"
+      - "Built the end-to-end ML services in Python/Flask that every inbound chat message passed through, on a platform that had processed 700M+ conversations; evaluated and tuned models across python-crfsuite, scikit-learn, TensorFlow, and PyTorch"
       - "Developed the Java IM gateway connecting Telegram and other messaging channels to the platform via Kafka and S3"
-      - "Ran the RabbitMQ + Apache Avro messaging layer carrying ~2 events per inbound message, roughly 20M events/day"
+      - "Ran the RabbitMQ + Apache Avro messaging layer behind production data processing, carrying roughly two events per inbound message"
       - "Deployed with Docker and Kubernetes on GCP; maintained 3 microservices across Go and Node.js"
 
   - company: Predictnow.ai
