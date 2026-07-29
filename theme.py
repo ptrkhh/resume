@@ -122,9 +122,14 @@ a:hover{color:var(--white);}
 
 /* The chip sits in normal flow beside the name, not absolutely positioned:
    otherwise a long surname slides underneath it at widths where the name
-   still fits on one line (~420-500px). */
+   still fits on one line (~420-500px). Only the name shares this row -- the
+   role sits below the chip and gets the card's full width. */
 .mhead{display:flex; align-items:flex-start; justify-content:space-between; gap:1.2rem;}
-.mheadtext{min-width:0;}
+/* No min-width:0 here -- the name must keep its min-content floor so the
+   flex row can never squeeze it narrower than its longest word. Streamlit's
+   containers inherit word-wrap:break-word, so neutralise that too or the
+   surname snaps mid-word ("Hermawa / n") on ~360px screens. */
+.mname{overflow-wrap:normal; word-break:normal;}
 .mtech{flex:none; display:flex; align-items:center; gap:.8rem; margin-top:-.2rem;}
 .nfc{width:22px; height:22px; fill:none; stroke:#5f666e; stroke-width:1.7; stroke-linecap:round; opacity:.8;}
 .chip{
@@ -311,12 +316,27 @@ a.mrow:hover{color:#23282d!important;}
 @media(max-width:680px){
   .mbody{grid-template-columns:1fr;}
   .mcard{padding:1.5rem 1.4rem;}
+  .mhead{gap:.7rem;}
   .mqr{display:none;}
   .only-wide{display:none;}
   .only-narrow{display:inline-flex;}
-  .mactions{flex-direction:column;}
-  .mkey{width:100%; justify-content:center;}
+  /* Share a row wherever both keys fit, wrap only when they genuinely
+     cannot; either way each key stretches to fill its line. */
+  .mkey{flex:1 1 auto; justify-content:center;}
   .proj-grid{grid-template-columns:1fr;}
+}
+
+/* Narrow phones (<=360px): the name hits its clamp() floor while the chip
+   keeps its fixed width, so the head row can no longer hold both and the
+   chip gets clipped. Step both down a notch rather than let either break. */
+@media(max-width:365px){
+  .mname{font-size:1.8rem;}
+  .mhead{gap:.5rem;}
+  .nfc{width:19px; height:19px;}
+  .chip{width:34px; height:26px;}
+}
+@media(max-width:330px){
+  .mname{font-size:1.62rem;}
 }
 
 @keyframes fadeUp{from{opacity:0; transform:translateY(14px);}to{opacity:1; transform:none;}}
@@ -335,12 +355,10 @@ def contact_card_html(p, qr_datauri, resume_url, card_url, vcf_url):
         '<div class="mstage">',
         '<div class="mcard">',
         '<div class="mhead">',
-        '<div class="mheadtext">',
         f'<div class="mname">{_e(p["name"])}</div>',
-        f'<div class="mrole">{_e(p["title"])}</div>',
-        '</div>',
         f'<div class="mtech">{_IC_NFC}<div class="chip"></div></div>',
         '</div>',
+        f'<div class="mrole">{_e(p["title"])}</div>',
         '<div class="groove"></div>',
         '<div class="mbody">',
         '<div class="mdetails">',
