@@ -24,10 +24,10 @@ experience:
     year_to: present
     description: Lead an AI R&D team delivering $500K+ in enterprise AI projects
     description_details:
-      - "Built a real-time speech-to-speech avatar: live LLM + RAG pipeline with lip-synced talking-head video streaming (Gemini, LangChain, MuseTalk, LoRA fine-tuning via Unsloth)"
-      - "Manage an 8-person AI team across 3 time zones, owning architecture, delivery, and client relationships"
-      - "Designed the routing layer serving 3,500+ retail stores worldwide"
-      - "Deploy and operate AI services on GCP with Docker and Kubernetes"
+      - "Build and ship a sub-second speech-to-speech avatar: live LLM + RAG, lip-synced video (Gemini Live)"
+      - "Own build-vs-buy calls: managed Gemini Live beat a self-hosted LoRA-tuned STT+LLM+RAG+TTS chain"
+      - "Manage an 8-person AI team across 2 time zones, owning architecture, delivery, and clients"
+      - "Design and own the routing layer serving 3,500+ stores, deployed on GCP with Docker and Kubernetes"
 
   - company: Redigan
     location: Jakarta, Indonesia
@@ -36,10 +36,10 @@ experience:
     year_to: 12 / 2023
     description: Co-founded an e-commerce platform and built its backend from MVP to production
     description_details:
-      - "Built the backend in Java/Spring Boot and Go/Gin with PostgreSQL, Redis, and OpenSearch full-text search"
+      - "Built the backend in Java/Spring Boot and Go/Gin with PostgreSQL, Redis, and OpenSearch"
       - "Integrated payment, logistics, and OCR vendors (BCA Bank, Shipper, AWS Textract)"
-      - "Added a ChatGPT-powered product recommendation system"
-      - "Halved infrastructure costs by consolidating AWS services (S3, EC2, RDS, OpenSearch) with zero downtime"
+      - "Shipped a ChatGPT-powered product recommendation system"
+      - "Halved infrastructure costs consolidating AWS services (S3, EC2, RDS) with zero downtime"
       - "Ran CI/CD and code-quality gates on GitHub Actions"
 
   - company: Kata.ai
@@ -49,10 +49,11 @@ experience:
     year_to: 10 / 2021
     description: Built production NLP services for Indonesia's leading conversational-AI platform
     description_details:
-      - "Built end-to-end ML services in Python/Flask; evaluated and tuned models across python-crfsuite, scikit-learn, TensorFlow, and PyTorch"
-      - "Built the Java IM gateway fronting the whole platform, connecting Telegram and other messaging apps via Kafka and S3"
-      - "Ran RabbitMQ + Apache Avro messaging for high-throughput data processing"
-      - "Deployed with Docker and Kubernetes on GCP; maintained Go and Node.js microservices"
+      - "Built the ML services every inbound chat message passed through, on a 700M+ conversation platform"
+      - "Evaluated and tuned models across python-crfsuite, scikit-learn, TensorFlow, and PyTorch"
+      - "Developed the Java IM gateway connecting Telegram and other channels via Kafka and S3"
+      - "Ran the RabbitMQ + Apache Avro layer carrying roughly two events per inbound message"
+      - "Deployed with Docker and Kubernetes on GCP; maintained 3 Go and Node.js microservices"
 
   - company: Predictnow.ai
     location: Ontario, Canada (Remote)
@@ -62,9 +63,9 @@ experience:
     description: Turned an ML prototype into a production prediction service
     description_details:
       - "Built the Flask ML API serving the platform's daily predictions"
-      - "Improved model performance with LightGBM and SHAP explainability"
-      - "Added Ray.io distributed computing and Honeycomb.io observability"
-      - "Published the platform's Python client on PyPI"
+      - "Added LightGBM and SHAP explainability to the prediction service"
+      - "Scaled inference horizontally with Ray.io — near-flat latency from 1 to 10 concurrent users"
+      - "Instrumented with Honeycomb.io; published the platform's Python client on PyPI"
 
   - company: MIA3 GmbH
     location: Gütersloh, Germany
@@ -170,7 +171,7 @@ skill:
 
 project:
   "Enterprise AI Platform: Zero-code ML classifier with intuitive GUI (scikit-learn + Tkinter)": "https://gitlab.com/patrick.hermawan/ai-in-123"
-  "Smart PC Builder: AI-powered hardware recommendation system (TensorFlow + Reddit API)": "https://gitlab.com/patrick.hermawan/buildmeapc"
+  "Smart PC Builder: Hardware recommendation system (TensorFlow + Reddit API)": "https://gitlab.com/patrick.hermawan/buildmeapc"
   "Automotive Analytics: Fuel consumption prediction model (PyTorch + Polars)": "https://github.com/ptrkhh/wheelsaroundme"
   "Interactive AI Resume: Conversational resume with LLM integration (Streamlit + Google Gemini)": "https://github.com/ptrkhh/resume"
 
