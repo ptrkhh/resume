@@ -25,9 +25,9 @@ experience:
     description: Lead an AI R&D team delivering $500K+ in enterprise AI projects
     description_details:
       - "Build and ship a real-time speech-to-speech avatar with sub-second response: live LLM + RAG pipeline with lip-synced talking-head video streaming (Gemini Live, LangChain, MuseTalk)"
+      - "Own model-architecture build-vs-buy calls: picked managed Gemini Live over a self-hosted STT + LLM + RAG + TTS chain after LoRA/Unsloth fine-tuning trials, cutting both latency and maintenance load"
       - "Manage an 8-person AI team across 3 time zones, owning architecture, delivery, and client relationships"
-      - "Design and own the routing layer serving 3,500+ retail stores worldwide"
-      - "Deploy and operate AI services on GCP with Docker and Kubernetes"
+      - "Design and own the routing layer serving 3,500+ retail stores worldwide, deployed on GCP with Docker and Kubernetes"
 
   - company: Redigan
     location: Jakarta, Indonesia
