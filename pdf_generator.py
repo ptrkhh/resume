@@ -32,8 +32,7 @@ FONT_DIR = ROOT / "assets" / "fonts"
 PAGE_SIZE = "A4"
 
 MAX_ROLES = 4       # roles shown in full; the rest collapse into "Earlier".
-# Bullets per role, most recent first — recent work earns more of the page.
-BULLETS_BY_RANK = (4, 4, 3, 3)
+MAX_BULLETS = 4     # bullets per role; each is written to hold a single line.
 MIN_EARLIER_MONTHS = 3   # skip sub-quarter stints in the "Earlier" line.
 MAX_EARLIER = 4
 
@@ -92,25 +91,15 @@ def _months(start, end):
 
 
 def _ranked_experience(experience):
-    """Reverse-chronological by end date, then start date.
-
-    The YAML is hand-ordered and drifts; sorting here means the PDF is always
-    in the order a recruiter expects. Roles whose span intersects a
-    higher-ranked role are tagged "Concurrent" so overlapping dates read as
-    deliberate rather than as a data error.
-    """
+    """Reverse-chronological by end date, then start date. The YAML is
+    hand-ordered and drifts; sorting here means the PDF is always in the order
+    a recruiter expects."""
     roles = []
     for exp in experience:
         start = _ym(exp.get("year_from")) or (0, 1)
         end = _ym(exp.get("year_to")) or start
         roles.append({**exp, "_start": start, "_end": end})
     roles.sort(key=lambda r: (r["_end"], r["_start"]), reverse=True)
-
-    for i, role in enumerate(roles):
-        role["_concurrent"] = any(
-            other["_start"] < role["_end"] and role["_start"] < other["_end"]
-            for other in roles[:i]
-        )
     return roles
 
 
@@ -186,7 +175,6 @@ h2 {{
 .role-title {{ font-weight: 600; font-size: 1.09rem; color: #1b2026; }}
 .dates {{ font-size: 0.944rem; color: #5b6672; white-space: nowrap; padding-left: 0.9rem; }}
 .org {{ font-size: 0.978rem; color: #46505a; }}
-.tag {{ font-size: 0.978rem; color: #5b6672; font-style: italic; }}
 ul {{ margin: 0.22rem 0 0 1.24rem; }}
 li {{ margin-bottom: 0.11rem; padding-left: 0.11rem; }}
 li::marker {{ color: #8a949e; }}
@@ -241,21 +229,17 @@ def _contact_lines(p):
 
 def _roles_html(roles):
     out = []
-    for rank, exp in enumerate(roles):
-        limit = BULLETS_BY_RANK[min(rank, len(BULLETS_BY_RANK) - 1)]
+    for exp in roles:
         bullets = "".join(
-            f"<li>{escape(b)}</li>" for b in exp.get("description_details", [])[:limit]
+            f"<li>{escape(b)}</li>" for b in exp.get("description_details", [])[:MAX_BULLETS]
         )
-        # The tag lives on the org line, not the title line: an ATS that reads
-        # the first line as the job title should get the job title only.
-        tag = f'{SEP}<span class="tag">Concurrent</span>' if exp["_concurrent"] else ""
         out.append(f"""
         <div class="role">
           <div class="role-head">
             <span class="role-title">{escape(exp['position'])}</span>
             <span class="dates">{_date_label(exp['year_from'])} – {_date_label(exp['year_to'])}</span>
           </div>
-          <div class="org">{escape(exp['company'])}{SEP}{escape(exp['location'])}{tag}</div>
+          <div class="org">{escape(exp['company'])}{SEP}{escape(exp['location'])}</div>
           <ul>{bullets}</ul>
         </div>""")
     return "".join(out)
