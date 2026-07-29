@@ -120,7 +120,12 @@ a:hover{color:var(--white);}
 .mcard:hover::after{left:120%;}
 .mcard>*{position:relative; z-index:1;}
 
-.mtech{position:absolute; top:1.6rem; right:2.1rem; z-index:2; display:flex; align-items:center; gap:.8rem;}
+/* The chip sits in normal flow beside the name, not absolutely positioned:
+   otherwise a long surname slides underneath it at widths where the name
+   still fits on one line (~420-500px). */
+.mhead{display:flex; align-items:flex-start; justify-content:space-between; gap:1.2rem;}
+.mheadtext{min-width:0;}
+.mtech{flex:none; display:flex; align-items:center; gap:.8rem; margin-top:-.2rem;}
 .nfc{width:22px; height:22px; fill:none; stroke:#5f666e; stroke-width:1.7; stroke-linecap:round; opacity:.8;}
 .chip{
   width:40px; height:31px; border-radius:6px; position:relative; flex:none;
@@ -188,6 +193,10 @@ a.mrow:hover{color:#23282d;}
   box-shadow:inset 0 1px 0 rgba(255,255,255,.14), inset 0 -2px 3px rgba(0,0,0,.5), 0 3px 6px rgba(0,0,0,.4);
 }
 .mkey--primary:hover{color:#fff;}
+/* Action keys swap by viewport: the QR plate is hidden on phones, so the
+   vCard needs its own key there in place of the printable card. Must come
+   after .mkey -- same specificity, so source order decides. */
+.only-narrow{display:none;}
 .mcaption{width:min(640px,100%); margin:2.7rem auto 0; color:var(--dim); font-size:.96rem; line-height:1.75; text-align:center;}
 
 /* ---------- section divider between card and resume ---------- */
@@ -302,7 +311,9 @@ a.mrow:hover{color:#23282d!important;}
 @media(max-width:680px){
   .mbody{grid-template-columns:1fr;}
   .mcard{padding:1.5rem 1.4rem;}
-  .mtech{top:1.35rem; right:1.4rem;}
+  .mqr{display:none;}
+  .only-wide{display:none;}
+  .only-narrow{display:inline-flex;}
   .mactions{flex-direction:column;}
   .mkey{width:100%; justify-content:center;}
   .proj-grid{grid-template-columns:1fr;}
@@ -323,9 +334,13 @@ def contact_card_html(p, qr_datauri, resume_url, card_url, vcf_url):
     return _join([
         '<div class="mstage">',
         '<div class="mcard">',
-        f'<div class="mtech">{_IC_NFC}<div class="chip"></div></div>',
+        '<div class="mhead">',
+        '<div class="mheadtext">',
         f'<div class="mname">{_e(p["name"])}</div>',
         f'<div class="mrole">{_e(p["title"])}</div>',
+        '</div>',
+        f'<div class="mtech">{_IC_NFC}<div class="chip"></div></div>',
+        '</div>',
         '<div class="groove"></div>',
         '<div class="mbody">',
         '<div class="mdetails">',
@@ -342,7 +357,8 @@ def contact_card_html(p, qr_datauri, resume_url, card_url, vcf_url):
         '</div>',
         '<div class="mactions">',
         f'<a class="mkey mkey--primary" href="{escape(resume_url, quote=True)}">Download R&eacute;sum&eacute; <span>&#8595;</span></a>',
-        f'<a class="mkey" href="{escape(card_url, quote=True)}" target="_blank">Print Card</a>',
+        f'<a class="mkey only-wide" href="{escape(card_url, quote=True)}" target="_blank">Print Card</a>',
+        f'<a class="mkey only-narrow" href="{escape(vcf_url, quote=True)}">Save Contact</a>',
         '</div>',
         '</div>',
         f'<div class="mcaption">{_e(p["summary"])}</div>',
