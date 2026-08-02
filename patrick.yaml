@@ -1,6 +1,6 @@
 name: Patrick Hermawan
 title: AI/ML Engineering Lead
-summary: AI/ML engineering leader with seven years across machine learning, backend, and cloud, now leading an 8-person team that has delivered $500K+ in production AI for enterprise clients. Recent work spans real-time speech-to-speech avatars, LLM/RAG platforms, and a routing layer serving 3,500+ retail stores worldwide.
+summary: AI/ML engineering leader with 7+ years across machine learning, backend, and cloud, currently leading an 8-person team across architecture, delivery, and client engagement. Ships a sub-second speech-to-speech avatar using a live LLM, RAG, and lip-synced video; earlier work includes production ML services for a 700M+ conversation platform and Java/Go backend platforms.
 
 education:
   - institute: Rhine-Waal University of Applied Sciences
@@ -24,10 +24,10 @@ experience:
     year_to: present
     description: Lead an AI R&D team delivering $500K+ in enterprise AI projects
     description_details:
-      - "Build and ship a sub-second speech-to-speech avatar: live LLM + RAG, lip-synced video (Gemini Live)"
-      - "Own build-vs-buy calls: managed Gemini Live beat a self-hosted LoRA-tuned STT+LLM+RAG+TTS chain"
-      - "Manage an 8-person AI team across 2 time zones, owning architecture, delivery, and clients"
-      - "Design and own the routing layer serving 3,500+ stores, deployed on GCP with Docker and Kubernetes"
+      - "Shipped a sub-second speech-to-speech avatar with live LLM, RAG, and lip-synced video (Gemini Live)"
+      - "Selected managed Gemini Live over a self-hosted LoRA-tuned STT+LLM+RAG+TTS chain"
+      - "Lead an 8-person AI R&D team across two time zones, owning architecture, delivery, and client engagement"
+      - "Design and own a routing layer serving 3,500+ stores, deployed on GCP with Docker and Kubernetes"
 
   - company: Redigan
     location: Jakarta, Indonesia
@@ -36,11 +36,10 @@ experience:
     year_to: 12 / 2023
     description: Co-founded an e-commerce platform and built its backend from MVP to production
     description_details:
-      - "Built the backend in Java/Spring Boot and Go/Gin with PostgreSQL, Redis, and OpenSearch"
+      - "Built Redigan's backend from MVP to production in Java/Spring Boot and Go/Gin with GitHub Actions CI/CD"
+      - "Halved AWS infrastructure costs with zero downtime by consolidating S3, EC2, and RDS"
       - "Integrated payment, logistics, and OCR vendors (BCA Bank, Shipper, AWS Textract)"
       - "Shipped a ChatGPT-powered product recommendation system"
-      - "Halved infrastructure costs consolidating AWS services (S3, EC2, RDS) with zero downtime"
-      - "Ran CI/CD and code-quality gates on GitHub Actions"
 
   - company: Kata.ai
     location: Jakarta, Indonesia
@@ -49,8 +48,7 @@ experience:
     year_to: 10 / 2021
     description: Built production NLP services for Indonesia's leading conversational-AI platform
     description_details:
-      - "Built the ML services every inbound chat message passed through, on a 700M+ conversation platform"
-      - "Evaluated and tuned models across python-crfsuite, scikit-learn, TensorFlow, and PyTorch"
+      - "Built ML services processing every inbound message on a 700M+ conversation platform; evaluated and tuned models using python-crfsuite, scikit-learn, TensorFlow, and PyTorch"
       - "Developed the Java IM gateway connecting Telegram and other channels via Kafka and S3"
       - "Ran the RabbitMQ + Apache Avro layer carrying roughly two events per inbound message"
       - "Deployed with Docker and Kubernetes on GCP; maintained 3 Go and Node.js microservices"
@@ -65,7 +63,7 @@ experience:
       - "Built the Flask ML API serving the platform's daily predictions"
       - "Added LightGBM and SHAP explainability to the prediction service"
       - "Scaled inference horizontally with Ray.io — near-flat latency from 1 to 10 concurrent users"
-      - "Instrumented with Honeycomb.io; published the platform's Python client on PyPI"
+      - "Instrumented the prediction service with Honeycomb.io and published its Python client on PyPI"
 
   - company: MIA3 GmbH
     location: Gütersloh, Germany
@@ -137,16 +135,13 @@ experience:
 
 skill:
   - icon: 🧠
-    title: AI & Machine Learning
+    title: Generative AI & Machine Learning
     list:
       - LLM & RAG systems (LangChain, Gemini)
-      - Fine-tuning (LoRA, Unsloth)
-      - Real-time speech-to-speech & talking avatars (MuseTalk)
-      - Text-to-speech & voice cloning
-      - PyTorch & TensorFlow
-      - scikit-learn & LightGBM
-      - GPU inference optimization (torch.compile)
-      - MLOps & model deployment
+      - Model evaluation & fine-tuning (PyTorch, TensorFlow, LoRA, Unsloth)
+      - Speech AI — STT, TTS, voice cloning & talking avatars (MuseTalk)
+      - Classical ML & explainability (scikit-learn, LightGBM, SHAP)
+      - MLOps, model deployment & GPU inference optimization (torch.compile)
 
   - icon: 💻
     title: Software Engineering

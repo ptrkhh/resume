@@ -152,7 +152,7 @@ a {{ color: #2f4858; text-decoration: none; }}
 }}
 .headline {{
   font-weight: 500; font-size: 1.06rem; text-transform: uppercase;
-  letter-spacing: 0.17rem; color: #4a5560; margin-top: 0.4rem;
+  letter-spacing: 0; color: #4a5560; margin-top: 0.4rem;
 }}
 .contact {{ font-size: 0.955rem; color: #384049; margin-top: 0.56rem; }}
 .contact div + div {{ margin-top: 0.11rem; }}
@@ -162,7 +162,7 @@ a {{ color: #2f4858; text-decoration: none; }}
 /* -------------------------------------------------------------- sections */
 h2 {{
   font-family: 'Space Grotesk', Helvetica, sans-serif; font-weight: 700;
-  font-size: 0.955rem; text-transform: uppercase; letter-spacing: 0.17rem;
+  font-size: 0.955rem; text-transform: uppercase; letter-spacing: 0;
   color: #2b333b; margin: 0.9rem 0 0.39rem; padding-bottom: 0.17rem;
   border-bottom: 0.6pt solid #c7ced4;
   break-after: avoid;
@@ -292,9 +292,6 @@ def _resume_html(p, base_pt=BASE_PT):
         f'<div class="line"><b>{escape(s["title"])}:</b> {escape(", ".join(s["list"]))}</div>'
         for s in p["skill"]
     )
-    projects = _projects_html(p)
-    projects_block = f"<h2>Projects</h2>{projects}" if projects else ""
-
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -317,8 +314,6 @@ def _resume_html(p, base_pt=BASE_PT):
   <h2>Experience</h2>
   {_roles_html(shown)}
   {_earlier_html(rest)}
-
-  {projects_block}
 
   <h2>Technical Skills</h2>
   {skills}
