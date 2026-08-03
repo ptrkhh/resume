@@ -24,8 +24,9 @@ experience:
     year_to: present
     description: Lead an AI R&D team delivering $500K+ in enterprise AI projects
     description_details:
-      - "Shipped a sub-second speech-to-speech avatar with live LLM, RAG, and lip-synced video (Gemini Live)"
-      - "Selected managed Gemini Live over a self-hosted LoRA-tuned STT+LLM+RAG+TTS chain"
+      - "Shipped a sub-second speech-to-speech avatar with live LLM, RAG, and lip-synced video"
+      - "Shipped integration of agentic tool calling using Gemini Live on Vertex AI"
+      - "Selected managed Gemini Live over a self-hosted LoRA-tuned STT+LLM+RAG+TTS chain after evaluating both"
       - "Lead an 8-person AI R&D team across two time zones, owning architecture, delivery, and client engagement"
       - "Design and own a routing layer serving 3,500+ stores, deployed on GCP with Docker and Kubernetes"
 
